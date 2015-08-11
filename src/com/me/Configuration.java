@@ -1,5 +1,10 @@
 package com.me;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +13,9 @@ public class Configuration {
 	private String userAgent;
 	private String loginURL;
 	private String username;
+	private String Configure;
+	
+	private String confPath = "Configure.xml";
 	public String getUsername() {
 		return username;
 	}
@@ -62,7 +70,22 @@ public class Configuration {
 	private String loginPwdAttrName;
 	
 	Configuration(){
-		userAgent = "";
+		
+		File f = new File(confPath);
+		BufferedReader reader = null;
+		String s = null;
+		try {
+			reader = new BufferedReader( new FileReader(f) );
+			String tmp = null;
+			while ((tmp=reader.readLine()) != null)
+				s += tmp;
+		} catch (FileNotFoundException e) {
+			System.out.println("Configuration File " + confPath + " not found!");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("read from " + confPath + " fail!");
+			e.printStackTrace();
+		}
 		attrName = new ArrayList<>();
 		attrName.add("sid");
 		attrName.add("sidtype");

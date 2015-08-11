@@ -48,11 +48,14 @@ public class Test {
 				}
 			}
 		}
-		List<String> l = new ArrayList<String>();
-		l.add("好友");
-		Map<String, URI> map = Tool.foundURL(b.getResult(uri, "post", formParams), l);
-		System.out.println(b.getResult(map.get("好友"), "get", null));
-		
+//		List<String> l = new ArrayList<String>();
+//		l.add("我的帮派");
+//		Map<String, URI> map = Tool.foundURL(b.getResult(uri, "post", formParams), l);
+		System.out.println(b.getResult(uri, "post", formParams));
+//		l.clear();
+//		l.add("留言");
+//		map.putAll(Tool.foundURL(b.getResult(map.get("我的帮派"), "get", null), l));
+//		System.out.println(map.get(l.get(0)));
 		b.destroy();
 	}
 }
