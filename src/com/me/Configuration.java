@@ -8,14 +8,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.htmlparser.jericho.Element;
+import net.htmlparser.jericho.Source;
+
 
 public class Configuration {
 	private String userAgent;
 	private String loginURL;
 	private String username;
 	private String Configure;
-	
-	private String confPath = "Configure.xml";
+	private Clickable root;
+	public Clickable getRoot() {
+		return root;
+	}
+
+	public void setRoot(Clickable root) {
+		this.root = root;
+	}
+
+	private String confPath = "Configuration.xml";
 	public String getUsername() {
 		return username;
 	}
@@ -71,6 +82,7 @@ public class Configuration {
 	
 	Configuration(){
 		
+		
 		File f = new File(confPath);
 		BufferedReader reader = null;
 		String s = null;
@@ -85,19 +97,29 @@ public class Configuration {
 		} catch (IOException e) {
 			System.out.println("read from " + confPath + " fail!");
 			e.printStackTrace();
+		} finally {
+			try {
+				if (reader != null)
+					reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
+		Source source = new Source(s);
+		Element e = source.getFirstElement("login");
 		attrName = new ArrayList<>();
-		attrName.add("sid");
-		attrName.add("sidtype");
-		attrName.add("hiddenPwd");
-		attrName.add("aid");
-		attrName.add("go_url");
-		attrName.add("login_url");
-		loginNameAttrName = "qq";
-		loginPwdAttrName = "pwd";
-		loginURL = "http://dld.qzapp.z.qq.com";
+		for( String s1:e.getAttributeValue("params").split(",")){
+			attrName.add(s1);
+		}
+		loginNameAttrName = e.getAttributeValue("loginNameAttrName");
+		loginPwdAttrName = e.getAttributeValue("loginPwdAttrName");
+		loginURL = e.getAttributeValue("host");
 		username = "1129426277";
 		password = "Djh19931004";
+		
+		root = new Clickable(source.getFirstElement("root"));
+
 	}
 	
 	public String getUserAgent() {

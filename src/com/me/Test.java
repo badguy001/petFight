@@ -4,7 +4,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -51,11 +50,26 @@ public class Test {
 //		List<String> l = new ArrayList<String>();
 //		l.add("我的帮派");
 //		Map<String, URI> map = Tool.foundURL(b.getResult(uri, "post", formParams), l);
-		System.out.println(b.getResult(uri, "post", formParams));
+		String result = b.getResult(uri, "post", formParams);
+		source.clearCache();
+		source = new Source(result);
+		new Test().Do(source, c.getRoot());
 //		l.clear();
 //		l.add("留言");
 //		map.putAll(Tool.foundURL(b.getResult(map.get("我的帮派"), "get", null), l));
 //		System.out.println(map.get(l.get(0)));
 		b.destroy();
+	}
+	
+	private void Do(Source e, Clickable c){
+		List<Element> urls = e.getAllElements("a");
+		for ( Clickable c1:c.getChilds()){
+			for (Element e1:urls){
+				if (e1.getAttributeValue("href").contains(c1.getInparams())){
+					System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
+					break;
+				}
+			}
+		}
 	}
 }

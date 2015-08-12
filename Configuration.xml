@@ -4,123 +4,123 @@
 
 <root host="http://dld.qzapp.z.qq.com" path="/qpet/cgi-bin/phonepk">
 
-	<mainmenu name="七武器" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=newAct&subtype=38">
+	<mainmenu name="七武器" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=38">
 	
 	</mainmenu>
 	
-	<mainmenu name="菜菜厨房" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=newAct&subtype=40">
+	<mainmenu name="菜菜厨房" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=40" time="" date="">
 	
 	</mainmenu>
 	
-	<mainmenu name="夏日作战" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=newAct&subtype=47">
+	<mainmenu name="夏日作战" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=47">
 	
 	</mainmenu>
 	
-	<mainmenu name="我要许愿" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=newAct&subtype=41">
+	<mainmenu name="我要许愿" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=41">
 	
 	</mainmenu>
 	
-	<mainmenu name="门派大战" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=sectbattle">
+	<mainmenu name="门派大战" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=sectbattle">
 	
 	</mainmenu>
 	
-	<mainmenu name="镖行天下" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=cargo">
+	<mainmenu name="镖行天下" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=cargo">
 	
 	</mainmenu>
 	
-	<mainmenu name="任务" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=task&sub=1">
+	<mainmenu name="任务" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=task&sub=1">
 	
 	</mainmenu>
 	
-	<mainmenu name="历练" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=mappush&subtype=1">
+	<mainmenu name="历练" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=mappush&subtype=1">
 	
 	</mainmenu>
 	
-	<mainmenu name="炼丹" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=alchemy&subtype=1">
+	<mainmenu name="炼丹" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=alchemy&subtype=1">
 	
 	</mainmenu>
 	
-	<mainmenu name="斗神塔" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=towerfight&type=3">
+	<mainmenu name="斗神塔" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=towerfight&type=3">
 	
 	</mainmenu>
 	
-	<mainmenu name="抢地盘" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=recommendmanor&type=4&page=1">
+	<mainmenu name="抢地盘" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=recommendmanor&type=4&page=1">
 	
 	</mainmenu>
 	
-	<mainmenu name="副本" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=pve">
+	<mainmenu name="副本" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=pve">
 	
 	</mainmenu>
 	
-	<mainmenu name="许愿" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=wish">
+	<mainmenu name="许愿" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=wish">
 	
 	</mainmenu>
 	
-	<mainmenu name="重出江湖" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=callback&subtype=3&page=1">
+	<mainmenu name="重出江湖" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=callback&subtype=3&page=1">
 	
 	</mainmenu>
 	
-	<mainmenu name="十二宫" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=zodiacdungeon">
+	<mainmenu name="十二宫" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=zodiacdungeon">
 	
 	</mainmenu>
 	
-	<mainmenu name="竞技场" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=arena">
+	<mainmenu name="竞技场" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=arena">
 	
 	</mainmenu>
 	
-	<mainmenu name="踢馆" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=facchallenge&subtype=0">
+	<mainmenu name="踢馆" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=facchallenge&subtype=0">
 	
 	</mainmenu>
 	
-	<mainmenu name="掠夺" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=forage_war">
+	<mainmenu name="掠夺" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=forage_war">
 	
 	</mainmenu>
 	
-	<mainmenu name="矿洞" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=factionmine">
+	<mainmenu name="矿洞" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=factionmine">
 	
 	</mainmenu>
 	
-	<mainmenu name="巅峰之战" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=gvg&sub=0">
+	<mainmenu name="巅峰之战" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=gvg&sub=0">
 	
 	</mainmenu>
 	
-	<mainmenu name="斗友" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=friendlist&type=1">
+	<mainmenu name="斗友" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=friendlist&type=1">
 	
 	</mainmenu>
 	
-	<mainmenu name="好友" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=friendlist">
+	<mainmenu name="好友" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=friendlist">
 	
 	</mainmenu>
 	
-	<mainmenu name="帮友" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=viewmem">
+	<mainmenu name="帮友" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=viewmem">
 	
 	</mainmenu>
 	
-	<mainmenu name="侠侣" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=viewxialv">
+	<mainmenu name="侠侣" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=viewxialv">
 	
 	</mainmenu>
 	
-	<mainmenu name="佣兵" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=mercenary&sub=1">
+	<mainmenu name="佣兵" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=mercenary&sub=1">
 	
 	</mainmenu>
 	
-	<mainmenu name="我的帮派" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=factionop&subtype=3&facid=5915442">
+	<mainmenu name="我的帮派" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=factionop&subtype=3&facid=5915442">
 	
 	</mainmenu>
 	
-	<mainmenu name="武林" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=showwulin">
+	<mainmenu name="武林" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=showwulin">
 	
 	</mainmenu>
 	
-	<mainmenu name="侠侣" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=cfight&subtype=1">
+	<mainmenu name="侠侣" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=cfight&subtype=1">
 	
 	</mainmenu>
 	
-	<mainmenu name="结拜" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=brofight&subtype=0">
+	<mainmenu name="结拜" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=brofight&subtype=0">
 	
 	</mainmenu>
 	
-	<mainmenu name="背包" params="zapp_uin,B_UID,sid,channel,g_ut" inparams="cmd=store">
+	<mainmenu name="背包" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=store">
 	
 	</mainmenu>
 </root>
