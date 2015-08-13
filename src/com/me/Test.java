@@ -12,15 +12,14 @@ import net.htmlparser.jericho.Attribute;
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
 
-public class Test {
+public class Test{
 
 	public static void main(String[] args) {
 		Configuration c = new Configuration();
-		Browse b = new Browse(c);
 		String src = new String();
 		try {
 			System.out.println();
-			src = b.getResult(new URI(c.getLoginURL()), "get", null);
+			src = Browse.getResult(new URI(c.getLoginURL()), "get", null);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +49,7 @@ public class Test {
 //		List<String> l = new ArrayList<String>();
 //		l.add("我的帮派");
 //		Map<String, URI> map = Tool.foundURL(b.getResult(uri, "post", formParams), l);
-		String result = b.getResult(uri, "post", formParams);
+		String result = Browse.getResult(uri, "post", formParams);
 		source.clearCache();
 		source = new Source(result);
 		new Test().Do(source, c.getRoot());
@@ -58,18 +57,70 @@ public class Test {
 //		l.add("留言");
 //		map.putAll(Tool.foundURL(b.getResult(map.get("我的帮派"), "get", null), l));
 //		System.out.println(map.get(l.get(0)));
-		b.destroy();
+//		Browse.destroy();
 	}
 	
-	private void Do(Source e, Clickable c){
+	public void Do(Source e, Clickable c){
 		List<Element> urls = e.getAllElements("a");
 		for ( Clickable c1:c.getChilds()){
 			for (Element e1:urls){
-				if (e1.getAttributeValue("href").contains(c1.getInparams())){
+				if (e1.getAttributeValue("href").replaceAll("&amp;", "&").contains(c1.getInparams()) 
+						&& (c1.getContain() == null ||e.toString().contains(c1.getContain()))
+						&& (c1.getContain() == null ||e1.getContent().toString().contains(c1.getContain()))
+						){
+					if (c1.getFreshtime() > 0){
+						new Thread( new myThread(e1, c1) ).start();
+						break;
+					}
 					System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
+					try {
+						System.out.println(Browse.getResult(new URI(e1.getAttributeValue("href")), "get", null));
+					} catch (URISyntaxException e2) {
+						e2.printStackTrace();
+					}
+					if (c1.getChilds() != null && c1.getChilds().size() != 0) {
+						try {
+							Do(new Source(Browse.getResult(new URI(e1.getAttributeValue("href")), "get", null)), c1);
+						} catch (URISyntaxException e2) {
+							e2.printStackTrace();
+						}
+					}
 					break;
 				}
 			}
 		}
+	}
+	private class myThread implements Runnable{
+		Element e1;
+		Clickable c1;
+		public myThread(Element e1, Clickable c1){
+			this.e1 = e1;
+			this.c1 = c1;
+		}
+		
+		@Override
+		public void run() {
+			for (int i = 0; i <= c1.getFreshtime(); i++) {
+				System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
+				try {
+					System.out.println(Browse.getResult(new URI(e1.getAttributeValue("href")), "get", null));
+				} catch (URISyntaxException e2) {
+					e2.printStackTrace();
+				}
+				if (c1.getChilds() != null && c1.getChilds().size() != 0) {
+					try {
+						Do(new Source(Browse.getResult(new URI(e1.getAttributeValue("href")), "get", null)), c1);
+					} catch (URISyntaxException e2) {
+						e2.printStackTrace();
+					}
+				}
+				try {
+					Thread.sleep(c1.getFreshwait());
+				} catch (InterruptedException e2) {
+					e2.printStackTrace();
+				}
+			}
+		}
+		
 	}
 }

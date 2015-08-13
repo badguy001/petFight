@@ -25,37 +25,31 @@ import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
 
 public class Browse {
-	private CookieStore cookieStore;
-	private CloseableHttpClient httpclient;
-	
-	public Browse(Configuration c) {
-		cookieStore = new BasicCookieStore();
-		httpclient = HttpClients.custom().setDefaultCookieStore(cookieStore)
-				.setUserAgent(c.getUserAgent()).build();
-	}
-	
-	public String getResult( URI uri, String method, List<NameValuePair> formParams){
+	private static CookieStore cookieStore = new BasicCookieStore();
+	private static CloseableHttpClient httpclient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
+
+	public static String getResult(URI uri, String method, List<NameValuePair> formParams) {
 		String result = new String();
 		HttpGet httpget = null;
 		HttpPost httppost = null;
 		CloseableHttpResponse response = null;
 		BufferedReader reader = null;
 		try {
-			if ( method.equals("get") ){
+			if (method.equals("get")) {
 				httpget = new HttpGet(uri);
 				response = httpclient.execute(httpget);
-			} else if ( method.equals("post") ){
+			} else if (method.equals("post")) {
 				httppost = new HttpPost(uri);
 				httppost.setEntity(new UrlEncodedFormEntity(formParams, "UTF-8"));
 				response = httpclient.execute(httppost);
 			}
 			reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 			String s = null;
-			while ( (s=reader.readLine()) != null ){
-				result += s+"\n";
+			while ((s = reader.readLine()) != null) {
+				result += s + "\n";
 			}
-			//不用重定向直接返回结果
-			if ( response.getStatusLine().getStatusCode() != 301 && response.getStatusLine().getStatusCode() != 302 ){
+			// 不用重定向直接返回结果
+			if (response.getStatusLine().getStatusCode() != 301 && response.getStatusLine().getStatusCode() != 302) {
 				return result;
 			}
 		} catch (ClientProtocolException e) {
@@ -76,35 +70,34 @@ public class Browse {
 				e.printStackTrace();
 			}
 		}
-		
-		//需要重定向（httpclient能处理标准的重定向，这里只处理不规范的重定向
-		
+
+		// 需要重定向（httpclient能处理标准的重定向，这里只处理不规范的重定向
+
 		Source src = new Source(result);
 		Element element = src.getFirstElement("a");
-		if ( element == null ){
-			//无可用url，重定向失败
+		if (element == null) {
+			// 无可用url，重定向失败
 			System.out.println("Redirct fail!");
 			return result;
 		}
 		Attributes attributes = element.getAttributes();
 		URI redrictURI = null;
 		try {
-			for ( Attribute attr:attributes )
-				if ( attr.getName().equals("href") )
+			for (Attribute attr : attributes)
+				if (attr.getName().equals("href"))
 					redrictURI = new URI(attr.getValue());
 		} catch (URISyntaxException e) {
-			//get url fail
+			// get url fail
 			e.printStackTrace();
 		}
-		if ( redrictURI == null ){
-			//redrict fail 
+		if (redrictURI == null) {
+			// redrict fail
 			return result;
-		}
-		else
+		} else
 			return getResult(redrictURI, "get", null);
 	}
-	
-	public void destroy(){
+
+	public static void destroy() {
 		cookieStore.clear();
 		cookieStore = null;
 		try {
