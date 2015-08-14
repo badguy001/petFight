@@ -25,7 +25,7 @@
 	
 	</mainmenu>
 	
-	<mainmenu name="菜菜厨房" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=40" time="" date="">
+	<mainmenu name="菜菜厨房" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=40">
 	
 	</mainmenu>
 	
@@ -117,11 +117,11 @@
 	
 	</mainmenu>
 	
-	<mainmenu name="巅峰之战" params="zapp_uin,B_UID,sid,channel,g_ut" order="101" inparams="cmd=gvg&sub=0">
+	<mainmenu name="巅峰之战" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=gvg&sub=0">
 		<mainmenu name="领奖" inparams="cmd=gvg&sub=1" context="领奖">
 		</mainmenu>
 		
-		<mainmenu name="征战" inparams="cmd=gvg&sub=5" context="征战" freshtime="10" freshwait="180">
+		<mainmenu name="征战" inparams="cmd=gvg&sub=5" context="征战" freshtime="1" freshwait="180">
 		</mainmenu>
 	</mainmenu>
 	
@@ -149,7 +149,7 @@
 	
 	</mainmenu>
 	
-	<mainmenu name="武林" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=showwulin">
+	<mainmenu name="武林" params="zapp_uin,B_UID,sid,channel,g_ut" order="101" inparams="cmd=showwulin" timeranges="12:00->23:59,00:00->6:00,17:55->17:59">
 	
 	</mainmenu>
 	

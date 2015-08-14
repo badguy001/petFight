@@ -3,10 +3,10 @@ package com.me;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -75,6 +75,9 @@ public class Test{
 					if (c1.getFreshtime() > 0){
 						new Thread( new FreshThread(e1, c1) ).start();
 						break;
+					} else if (c1.getTimeranges() != null && c1.getTimeranges().size() > 0){
+						new Schedule(e1, c1).begin();
+						break;
 					}
 					System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
 					try {
@@ -94,6 +97,7 @@ public class Test{
 			}
 		}
 	}
+	
 	private class FreshThread implements Runnable{
 		Element e1;
 		Clickable c1;
@@ -122,6 +126,45 @@ public class Test{
 					Thread.sleep(c1.getFreshwait());
 				} catch (InterruptedException e2) {
 					e2.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	private class Schedule extends TimerTask{
+		Element e1;
+		Clickable c1;
+		public Schedule(Element e1, Clickable c1){
+			this.e1 = e1;
+			this.c1 = c1;
+		}
+		
+		public void begin(){
+			for (TimeRange timerange:c1.getTimeranges()){
+				if (timerange.getBegin().compareTo(timerange.getBegin().getNowTime()) <= 0 
+						&& timerange.getEnd().compareTo(timerange.getBegin().getNowTime()) >= 0){
+					run();
+				} else if ( timerange.getBegin().compareTo(timerange.getBegin().getNowTime()) > 0 
+						&& timerange.getEnd().compareTo(timerange.getBegin().getNowTime()) > 0){
+					System.out.println(timerange.getBegin().getDate().toString());
+					new Timer().schedule(this, timerange.getBegin().getDate());
+				}
+			}
+		}
+		
+		@Override
+		public void run() {
+			System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
+			try {
+				System.out.println(Browse.getResult(new URI(e1.getAttributeValue("href")), "get", null));
+			} catch (URISyntaxException e2) {
+				e2.printStackTrace();
+			}
+			if (c1.getChilds() != null && c1.getChilds().size() > 0) {
+				try {
+					Do(new Source(Browse.getResult(new URI(e1.getAttributeValue("href")), "get", null)), c1);
+				} catch (URISyntaxException e) {
+					e.printStackTrace();
 				}
 			}
 		}

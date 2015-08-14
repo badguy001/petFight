@@ -45,6 +45,13 @@ public class Clickable implements Comparable<Clickable>{
 	private int order;
 	private String context;
 	private int freshtime;
+	private List<TimeRange> timeranges;
+	public List<TimeRange> getTimeranges() {
+		return timeranges;
+	}
+	public void setTimeranges(List<TimeRange> timeranges) {
+		this.timeranges = timeranges;
+	}
 	public int getFreshtime() {
 		return freshtime;
 	}
@@ -64,6 +71,7 @@ public class Clickable implements Comparable<Clickable>{
 	public void setContext(String context) {
 		this.context = context;
 	}
+	
 	public int getOrder() {
 		return order;
 	}
@@ -79,10 +87,23 @@ public class Clickable implements Comparable<Clickable>{
 		setContext(e.getAttributeValue("context"));
 		setFreshtime(e.getAttributeValue("freshtime") == null || e.getAttributeValue("freshtime").equals("") ? 0 : Integer.valueOf(e.getAttributeValue("freshtime")));
 		setFreshwait(e.getAttributeValue("freshwait") == null || e.getAttributeValue("freshwait").equals("") ? 0 : Integer.valueOf(e.getAttributeValue("freshwait")));
+		setTimeranges(getTimeranges(e.getAttributeValue("timeranges")));
+		if (timeranges != null)
+			Collections.sort(timeranges);
 		childs = getChilds(e);
 		if ( childs != null ){
 			Collections.sort(childs);
 		}
+	}
+	
+	private List<TimeRange> getTimeranges(String ranges){
+		if (ranges == null)
+			return null;
+		List<TimeRange> l = new ArrayList<>();
+		String s[] = ranges.split(",");
+		for (String s1:s)
+			l.add(new TimeRange(s1));
+		return l;
 	}
 	
 	private List<Clickable> getChilds(Element e) {
