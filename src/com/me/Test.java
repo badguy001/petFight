@@ -3,7 +3,10 @@ package com.me;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -62,6 +65,7 @@ public class Test{
 	
 	public void Do(Source e, Clickable c){
 		List<Element> urls = e.getAllElements("a");
+		
 		for ( Clickable c1:c.getChilds()){
 			for (Element e1:urls){
 				if (e1.getAttributeValue("href").replaceAll("&amp;", "&").contains(c1.getInparams()) 
@@ -69,7 +73,7 @@ public class Test{
 						&& (c1.getContain() == null ||e1.getContent().toString().contains(c1.getContain()))
 						){
 					if (c1.getFreshtime() > 0){
-						new Thread( new myThread(e1, c1) ).start();
+						new Thread( new FreshThread(e1, c1) ).start();
 						break;
 					}
 					System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
@@ -90,10 +94,10 @@ public class Test{
 			}
 		}
 	}
-	private class myThread implements Runnable{
+	private class FreshThread implements Runnable{
 		Element e1;
 		Clickable c1;
-		public myThread(Element e1, Clickable c1){
+		public FreshThread(Element e1, Clickable c1){
 			this.e1 = e1;
 			this.c1 = c1;
 		}
