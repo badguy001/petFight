@@ -5,7 +5,9 @@
 <loginverify params="qq,u_token,r,extend,r_sid,aid,hiddenPwd,login_url,go_url,verify" />
 
 <root host="http://dld.qzapp.z.qq.com" path="/qpet/cgi-bin/phonepk">
-
+	<mainmenu name="锦标赛" context="锦标赛" order="" notparagrapheand="公告">
+		<mainmenu name="赞助" context="赞助" paragrapheor="菜菜&&月敏" notcontainand="免费赞助：0"></mainmenu>
+	</mainmenu>
 	<mainmenu name="七武器" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=38">
 		<mainmenu name="充能" order="1" inparams="cmd=newAct&subtype=38&op=recharge" context="充能">
 		</mainmenu>
@@ -49,8 +51,9 @@
 	
 	</mainmenu>
 	
-	<mainmenu name="我要许愿" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=41">
-	
+	<mainmenu name="我要许愿" params="zapp_uin,B_UID,sid,channel,g_ut" order="-1" inparams="cmd=newAct&subtype=41" containand="" containor="">
+		<mainmenu name="许愿" context="许愿" paragrapheor="传功符&&魂珠"></mainmenu>
+
 	</mainmenu>
 	
 	<mainmenu name="门派大战" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=sectbattle">

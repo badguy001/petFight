@@ -87,6 +87,42 @@ public class Management {
 			return false;
 		if (c1.getContext() != null && !e1.getContent().toString().contains(c1.getContext()))
 			return false;
+		if (c1.getNotcontextand() != null && containsAll(e1.getContent().toString(), c1.getNotcontextand()))
+			return false;
+		if (c1.getContainand() != null && !containsAll(e.toString(), c1.getContainand()))
+			return false;
+		if (c1.getContainor() != null && !containsAny(e.toString(), c1.getContainor()))
+			return false;
+		if (c1.getNotcontainand() != null && containsAll(e.toString(), c1.getNotcontainand()))
+			return false;
+		if (c1.getNotcontainor() != null && containsAny(e.toString(), c1.getContainor()))
+			return false;
+		String br[] = e.toString().split("<br />");
+		for (String br1:br)
+			if (br1.contains(e1.toString()))
+				if (c1.getParagrapheand() != null && !containsAll(br1, c1.getParagrapheand()))
+					return false;
+				else if (c1.getParagrapheor() != null && !containsAny(br1, c1.getParagrapheor()))
+					return false;
+				else if (c1.getNotparagrapheand() != null && containsAll(br1, c1.getNotparagrapheand()))
+					return false;
+				else if (c1.getNotparagrapheor() != null && containsAny(br1, c1.getNotparagrapheor()))
+					return false;
+		
+		return true;
+		
+	}
+	private boolean containsAll(String src, String e[]){
+		for (String s:e)
+			if (!src.contains(s))
+				return false;
+		return true;
+	}
+	private boolean containsAny(String src, String e[]){
+		for (String s:e)
+			if (src.contains(s))
+				return true;
+		return false;
 	}
 	
 	public void Do(Source e, Clickable c) {
@@ -94,15 +130,13 @@ public class Management {
 
 		for (Clickable c1 : c.getChilds()) {
 			for (Element e1 : urls) {
-				if (e1.getAttributeValue("href").replaceAll("&amp;", "&").contains(c1.getInparams())
-						&& (c1.getContain() == null || e.toString().contains(c1.getContain()))
-						&& (c1.getContain() == null || e1.getContent().toString().contains(c1.getContain()))) {
+				if (match(e, e1, c1)) {
 					if (c1.getFreshtime() > 0) {
 						new Thread(new FreshThread(e1, c1)).start();
-						break;
+						continue;
 					} else if (c1.getTimeranges() != null && c1.getTimeranges().size() > 0) {
 						new Schedule(e1, c1).begin();
-						break;
+						continue;
 					}
 					System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
 
@@ -113,7 +147,7 @@ public class Management {
 						Do(new Source(Browse.getResult(e1.getAttributeValue("href"), "get", null)), c1);
 
 					}
-					break;
+					continue;
 				}
 			}
 		}
