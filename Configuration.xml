@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<login params="sid,sidtype,hiddenPwd,aid,go_url,login_url" host="http://dld.qzapp.z.qq.com" loginNameAttrName="qq" loginPwdAttrName="pwd" userAgent=""/>
+<login params="sid,sidtype,hiddenPwd,aid,go_url,login_url" host="http://dld.qzapp.z.qq.com" loginNameAttrName="qq" loginPwdAttrName="pwd" userAgent="" 
+	username="1129426277" password="Djh19931004"/>
+<loginverify params="qq,u_token,r,extend,r_sid,aid,hiddenPwd,login_url,go_url,verify" />
 
 <root host="http://dld.qzapp.z.qq.com" path="/qpet/cgi-bin/phonepk">
 
@@ -149,7 +151,7 @@
 	
 	</mainmenu>
 	
-	<mainmenu name="武林" params="zapp_uin,B_UID,sid,channel,g_ut" order="101" inparams="cmd=showwulin" timeranges="12:00->23:59,00:00->6:00,17:55->17:59">
+	<mainmenu name="武林" params="zapp_uin,B_UID,sid,channel,g_ut" order="101" inparams="cmd=showwulin" timeranges="12:00->23:59,00:00->6:00">
 	
 	</mainmenu>
 	

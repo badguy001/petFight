@@ -28,13 +28,15 @@ public class Browse {
 	private static CookieStore cookieStore = new BasicCookieStore();
 	private static CloseableHttpClient httpclient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
 
-	public static String getResult(URI uri, String method, List<NameValuePair> formParams) {
+	public static String getResult(String sURI, String method, List<NameValuePair> formParams) {
 		String result = new String();
 		HttpGet httpget = null;
+		URI uri = null;
 		HttpPost httppost = null;
 		CloseableHttpResponse response = null;
 		BufferedReader reader = null;
 		try {
+			uri = new URI(sURI);
 			if (method.equals("get")) {
 				httpget = new HttpGet(uri);
 				response = httpclient.execute(httpget);
@@ -60,6 +62,9 @@ public class Browse {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			System.out.println(sURI + " is not a URI!");
+			e.printStackTrace();
 		} finally {
 			try {
 				if (reader != null)
@@ -77,27 +82,27 @@ public class Browse {
 		Element element = src.getFirstElement("a");
 		if (element == null) {
 			// 无可用url，重定向失败
-			System.out.println("Redirct fail!");
+			System.out.println("cannot find redrictURI!");
 			return result;
 		}
 		Attributes attributes = element.getAttributes();
-		URI redrictURI = null;
-		try {
-			for (Attribute attr : attributes)
-				if (attr.getName().equals("href"))
-					redrictURI = new URI(attr.getValue());
-		} catch (URISyntaxException e) {
-			// get url fail
-			e.printStackTrace();
-		}
+		String redrictURI = null;
+		for (Attribute attr : attributes)
+			if (attr.getName().equals("href"))
+				redrictURI = attr.getValue();
 		if (redrictURI == null) {
 			// redrict fail
+			System.out.println("cannot find redrictURI!");
 			return result;
-		} else
+		} else{
+			System.out.println("redrict to " + redrictURI);
 			return getResult(redrictURI, "get", null);
+		}
+			
 	}
 
 	public static void destroy() {
+		System.out.println("destroy httpclient");
 		cookieStore.clear();
 		cookieStore = null;
 		try {

@@ -16,7 +16,6 @@ public class Configuration {
 	private String userAgent;
 	private String loginURL;
 	private String username;
-	private String Configure;
 	private Clickable root;
 	public Clickable getRoot() {
 		return root;
@@ -52,12 +51,12 @@ public class Configuration {
 		this.loginURL = loginURL;
 	}
 
-	public List<String> getAttrName() {
-		return attrName;
+	public List<String> getLoginAttrName() {
+		return loginAttrName;
 	}
 
-	public void setAttrName(List<String> attrName) {
-		this.attrName = attrName;
+	public void setLoginAttrName(List<String> attrName) {
+		this.loginAttrName = attrName;
 	}
 
 	public String getLoginNameAttrName() {
@@ -76,10 +75,18 @@ public class Configuration {
 		this.loginPwdAttrName = loginPwdAttrName;
 	}
 
-	private List<String> attrName;
+	private List<String> loginAttrName;
 	private String loginNameAttrName;
 	private String loginPwdAttrName;
-	
+	private String[] verifyAttrName;
+	public String[] getVerifyAttrName() {
+		return verifyAttrName;
+	}
+
+	public void setVerifyAttrName(String[] verifyAttrName) {
+		this.verifyAttrName = verifyAttrName;
+	}
+
 	Configuration(){
 		
 		
@@ -108,16 +115,17 @@ public class Configuration {
 		
 		Source source = new Source(s);
 		Element e = source.getFirstElement("login");
-		attrName = new ArrayList<>();
+		loginAttrName = new ArrayList<>();
 		for( String s1:e.getAttributeValue("params").split(",")){
-			attrName.add(s1);
+			loginAttrName.add(s1);
 		}
 		loginNameAttrName = e.getAttributeValue("loginNameAttrName");
 		loginPwdAttrName = e.getAttributeValue("loginPwdAttrName");
 		loginURL = e.getAttributeValue("host");
-		username = "1129426277";
-		password = "Djh19931004";
-		
+		username = e.getAttributeValue("username");
+		password = e.getAttributeValue("password");
+		e = source.getFirstElement("loginverify");
+		verifyAttrName = e.getAttributeValue("params").split(",");
 		root = new Clickable(source.getFirstElement("root"));
 
 	}
