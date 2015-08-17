@@ -3,6 +3,8 @@ package com.me;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -87,7 +89,13 @@ public class Management {
 			return false;
 		if (c1.getContext() != null && !e1.getContent().toString().contains(c1.getContext()))
 			return false;
+		if (c1.getContextand() != null && !containsAll(e1.getContent().toString(), c1.getContextand()))
+			return false;
+		if (c1.getContextor() != null && !containsAny(e1.getContent().toString(), c1.getContextor()))
+			return false;
 		if (c1.getNotcontextand() != null && containsAll(e1.getContent().toString(), c1.getNotcontextand()))
+			return false;
+		if (c1.getNotcontextor() != null && containsAny(e1.getContent().toString(), c1.getNotcontextor()))
 			return false;
 		if (c1.getContainand() != null && !containsAll(e.toString(), c1.getContainand()))
 			return false;
@@ -97,6 +105,7 @@ public class Management {
 			return false;
 		if (c1.getNotcontainor() != null && containsAny(e.toString(), c1.getContainor()))
 			return false;
+
 		String br[] = e.toString().split("<br />");
 		for (String br1:br)
 			if (br1.contains(e1.toString()))
@@ -139,7 +148,10 @@ public class Management {
 						continue;
 					}
 					System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
-
+					String result = Browse.getResult(e1.getAttributeValue("href"), "get", null);
+					if (c1.getResultreg() != null )
+						System.out.println(getResult(result, c1.getResultreg()));
+					
 //					System.out.println(Browse.getResult(e1.getAttributeValue("href"), "get", null));
 
 					if (c1.getChilds() != null && c1.getChilds().size() != 0) {
@@ -147,12 +159,26 @@ public class Management {
 						Do(new Source(Browse.getResult(e1.getAttributeValue("href"), "get", null)), c1);
 
 					}
+					if (c1.isDisablebelow())
+						break;
 					continue;
 				}
 			}
 		}
 	}
-
+	
+	private String getResult(String src, String resultreg[]){
+		String result = "";
+		Pattern pattern = null;
+		Matcher matcher = null;
+		for (String reg:resultreg){
+			pattern = Pattern.compile(reg);
+			matcher = pattern.matcher(src);
+			while (matcher.find())
+				result = result + matcher.group() + "\n\t" ;
+		}
+		return result;
+	}
 	private class FreshThread implements Runnable {
 		Element e1;
 		Clickable c1;
@@ -166,7 +192,9 @@ public class Management {
 		public void run() {
 			for (int i = 0; i <= c1.getFreshtime(); i++) {
 				System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
-
+				String result = Browse.getResult(e1.getAttributeValue("href"), "get", null);
+				if (c1.getResultreg() != null )
+					System.out.println(getResult(result, c1.getResultreg()));
 //				System.out.println(Browse.getResult(e1.getAttributeValue("href"), "get", null));
 
 				if (c1.getChilds() != null && c1.getChilds().size() != 0) {
@@ -208,7 +236,9 @@ public class Management {
 		@Override
 		public void run() {
 			System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
-
+			String result = Browse.getResult(e1.getAttributeValue("href"), "get", null);
+			if (c1.getResultreg() != null )
+				System.out.println(getResult(result, c1.getResultreg()));
 //			System.out.println(Browse.getResult(e1.getAttributeValue("href"), "get", null));
 
 			if (c1.getChilds() != null && c1.getChilds().size() > 0) {

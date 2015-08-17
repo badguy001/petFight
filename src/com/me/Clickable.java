@@ -26,7 +26,11 @@ public class Clickable implements Comparable<Clickable>{
 	private String notcontainand[];
 	private String notcontainor[];
 	private String notcontextand[];
-	
+	private String notcontextor[];
+	private boolean disablebelow;
+	private String resultreg[];
+	private String contextand[];
+	private String contextor[];
 	public String[] getNotcontextand() {
 		return notcontextand;
 	}
@@ -57,7 +61,6 @@ public class Clickable implements Comparable<Clickable>{
 	public void setNotparagrapheor(String[] notparagrapheor) {
 		this.notparagrapheor = notparagrapheor;
 	}
-
 	public String[] getParagrapheand() {
 		return paragrapheand;
 	}
@@ -70,7 +73,6 @@ public class Clickable implements Comparable<Clickable>{
 	public void setParagrapheor(String[] paragrapheor) {
 		this.paragrapheor = paragrapheor;
 	}
-
 	public String getName() {
 		return name;
 	}
@@ -137,7 +139,6 @@ public class Clickable implements Comparable<Clickable>{
 	public void setContext(String context) {
 		this.context = context;
 	}
-	
 	public int getOrder() {
 		return order;
 	}
@@ -163,6 +164,11 @@ public class Clickable implements Comparable<Clickable>{
 		setNotcontainand(e.getAttributeValue("notcontainand") == null ? null : e.getAttributeValue("notcontainand").split("&&"));
 		setNotcontainor(e.getAttributeValue("notcontainor") == null ? null : e.getAttributeValue("notcontainor").split("&&"));
 		setNotcontextand(e.getAttributeValue("notcontextand") == null ? null : e.getAttributeValue("notcontextand").split("&&"));
+		setNotcontextor(e.getAttributeValue("notcontextor") == null ? null : e.getAttributeValue("notcontextor").split("&&"));
+		setDisablebelow(e.getAttributeValue("disablebelow") == null || Integer.valueOf(e.getAttributeValue("disablebelow")) != 1 ? false : true ); 
+		setResultreg(e.getAttributeValue("resultreg") == null || e.getAttributeValue("resultreg").equals("") ? null : e.getAttributeValue("resultreg").split("&&"));
+		setContextand(e.getAttributeValue("contextand") == null ? null : e.getAttributeValue("contextand").split("&&"));
+		setContextor(e.getAttributeValue("contextor") == null ? null : e.getAttributeValue("contextor").split("&&"));
 		if (timeranges != null)
 			Collections.sort(timeranges);
 		childs = getChilds(e);
@@ -202,4 +208,35 @@ public class Clickable implements Comparable<Clickable>{
 		else 
 			return -1;
 	}
+	public String[] getNotcontextor() {
+		return notcontextor;
+	}
+	public void setNotcontextor(String notcontextor[]) {
+		this.notcontextor = notcontextor;
+	}
+	public boolean isDisablebelow() {
+		return disablebelow;
+	}
+	public void setDisablebelow(boolean disablebelow) {
+		this.disablebelow = disablebelow;
+	}
+	public String[] getResultreg() {
+		return resultreg;
+	}
+	public void setResultreg(String resultreg[]) {
+		this.resultreg = resultreg;
+	}
+	public String[] getContextor() {
+		return contextor;
+	}
+	public void setContextor(String contextor[]) {
+		this.contextor = contextor;
+	}
+	public String[] getContextand() {
+		return contextand;
+	}
+	public void setContextand(String contextand[]) {
+		this.contextand = contextand;
+	}
+
 }

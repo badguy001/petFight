@@ -34,26 +34,26 @@
 	</mainmenu>
 	
 	<mainmenu name="夏日作战" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=47">
-		<mainmenu name="领取小铜锤" inparams="cmd=newAct&subtype=47&op=get" context="领取小铜锤">
+		<mainmenu name="领取小铜锤" inparams="cmd=newAct&subtype=47&op=get" context="领取">
 		</mainmenu>
 		
 		<mainmenu name="打豆豆" inparams="cmd=newAct&subtype=47&op=hit&amp;type=0" context="打豆豆">
 		</mainmenu>
 		
-		<mainmenu name="三五成群" inparams="cmd=newAct&amp;subtype=47&op=award&gift_id=157" context="三五成群">
+		<mainmenu name="三五成群"  context="三五成群">
 		</mainmenu>
 		
-		<mainmenu name="人山人海" inparams="cmd=newAct&subtype=47&op=award&gift_id=158" context="人山人海">
+		<mainmenu name="人山人海"  context="人山人海">
 		</mainmenu>
 		
-		<mainmenu name="万人空巷" inparams="cmd=newAct&subtype=47&op=award&gift_id=159" context="万人空巷">
+		<mainmenu name="万人空巷"  context="万人空巷" resultreg="恭喜你获得[^！]+！">
 		</mainmenu>
 	
 	</mainmenu>
 	
-	<mainmenu name="我要许愿" params="zapp_uin,B_UID,sid,channel,g_ut" order="-1" inparams="cmd=newAct&subtype=41" containand="" containor="">
-		<mainmenu name="许愿" context="许愿" paragrapheor="传功符&&魂珠"></mainmenu>
-
+	<mainmenu name="我要许愿" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=41" containand="" containor="">
+		<mainmenu name="许愿" context="许愿" paragrapheor="传功符&&魂珠" resultreg="虔诚[^！]+！&&您今天已经[^！]+！"></mainmenu>
+		<mainmenu name="领取" contextor="传功符&&魂珠" resultreg=""></mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="门派大战" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=sectbattle">
@@ -107,7 +107,17 @@
 	</mainmenu>
 	
 	<mainmenu name="竞技场" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=arena">
+		<mainmenu name="开始挑战" context="开始挑战" notcontainand="5/5">
+			<mainmenu name="开始挑战" context="开始挑战" notcontainand="5/5">
+				<mainmenu name="开始挑战" context="开始挑战" notcontainand="5/5">
+					<mainmenu name="开始挑战" context="开始挑战" notcontainand="5/5">
+						<mainmenu name="开始挑战" context="开始挑战" notcontainand="5/5">
 	
+						</mainmenu>
+					</mainmenu>
+				</mainmenu>
+			</mainmenu>
+		</mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="踢馆" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=facchallenge&subtype=0">
@@ -119,14 +129,14 @@
 	</mainmenu>
 	
 	<mainmenu name="矿洞" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=factionmine">
-	
+		<mainmenu name="挑战" context="挑战" resultreg="挑战次数不足！" notcontextor="纪录&&规则"></mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="巅峰之战" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=gvg&sub=0">
 		<mainmenu name="领奖" inparams="cmd=gvg&sub=1" context="领奖">
 		</mainmenu>
 		
-		<mainmenu name="征战" inparams="cmd=gvg&sub=5" context="征战" freshtime="1" freshwait="180">
+		<mainmenu name="征战" context="征战" freshtime="1" freshwait="180">
 		</mainmenu>
 	</mainmenu>
 	
@@ -139,23 +149,29 @@
 	</mainmenu>
 	
 	<mainmenu name="帮友" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=viewmem">
-	
+		<mainmenu name="boss" context="乐斗" notcontextand="已乐斗" paragrapheand="侠："></mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="侠侣" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=viewxialv">
-	
+		<mainmenu name="boss" context="乐斗" notcontextand="已乐斗" paragrapheand="侠："></mainmenu>
 	</mainmenu>
 	
-	<mainmenu name="佣兵" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=mercenary&sub=1">
+	<mainmenu name="佣兵" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=mercenary&sub=1" notcontextor="助阵&&还童" disablebelow="1">
 	
 	</mainmenu>
 	
 	<mainmenu name="我的帮派" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=factionop&subtype=3&facid=5915442">
-	
+		<mainmenu name="帮派守护神" context="帮派守护神" >
+			<mainmenu name="享受菜菜大餐" context="享受菜菜大餐" containor="已达六小时&&已达四小时" resultreg="您刚才[^。]+。">
+				<mainmenu name="帮派守护神" context="帮派守护神" >
+					
+				</mainmenu>
+			</mainmenu>
+		</mainmenu>
 	</mainmenu>
 	
-	<mainmenu name="武林" params="zapp_uin,B_UID,sid,channel,g_ut" order="101" inparams="cmd=showwulin" timeranges="12:00->23:59,00:00->6:00">
-	
+	<mainmenu name="武林" params="zapp_uin,B_UID,sid,channel,g_ut" order="101" inparams="cmd=showwulin" timeranges="14:00->23:59,00:00->6:00">
+		<mainmenu name="报名" context="随机报名" containand="未参赛"></mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="侠侣" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=cfight&subtype=1">

@@ -88,8 +88,6 @@ public class Configuration {
 	}
 
 	Configuration(){
-		
-		
 		File f = new File(confPath);
 		BufferedReader reader = null;
 		String s = null;
