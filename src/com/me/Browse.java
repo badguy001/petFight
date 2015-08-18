@@ -26,7 +26,9 @@ import net.htmlparser.jericho.Source;
 
 public class Browse {
 	private static CookieStore cookieStore = new BasicCookieStore();
-	private static CloseableHttpClient httpclient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
+	private static CloseableHttpClient httpclient = HttpClients.custom().setDefaultCookieStore(cookieStore)
+//			.setUserAgent("Mozilla/5.0 (Windows NT 5.2) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30")
+			.build();
 
 	public static String getResult(String sURI, String method, List<NameValuePair> formParams) {
 		String result = new String();

@@ -1,19 +1,5 @@
 package com.me;
 
-import java.awt.Button;
-import java.awt.FlowLayout;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.TextField;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.ImageProducer;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
@@ -104,7 +90,6 @@ public class Management {
 	private String getVerify(Source source, String[] verifyfresh) {
 		String imgURL = null;
 		String result = null;
-		Frame frame = new Frame();
 		imgURL = source.getFirstElement("img").getAttributeValue("src");
 		result = new getVerifyCode().getcode(imgURL);
 		return result;

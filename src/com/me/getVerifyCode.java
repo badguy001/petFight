@@ -24,6 +24,7 @@ public class getVerifyCode {
 	Image img = null;
 
 	public getVerifyCode() {
+		String s = null;
 		frame = new Frame();
 		frame.setSize(500, 200);
 		text = new TextField();

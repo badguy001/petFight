@@ -128,7 +128,7 @@ public class Configuration {
 		verifyAttrName = e.getAttributeValue("params").split(",");
 		setVerifyname(e.getAttributeValue("verifyname"));
 		e = source.getFirstElement("verifyfresh");
-		setVerifyfresh(e.getAttributeValue("verifyfresh") == null ? null : e.getAttributeValue("verifyfresh").split(","));
+		setVerifyfresh(e.getAttributeValue("params") == null ? null : e.getAttributeValue("params").split(","));
 		root = new Clickable(source.getFirstElement("root"));
 
 	}
