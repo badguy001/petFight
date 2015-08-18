@@ -31,6 +31,7 @@ public class Clickable implements Comparable<Clickable>{
 	private String resultreg[];
 	private String contextand[];
 	private String contextor[];
+	private boolean isshow;
 	public String[] getNotcontextand() {
 		return notcontextand;
 	}
@@ -169,6 +170,7 @@ public class Clickable implements Comparable<Clickable>{
 		setResultreg(e.getAttributeValue("resultreg") == null || e.getAttributeValue("resultreg").equals("") ? null : e.getAttributeValue("resultreg").split("&&"));
 		setContextand(e.getAttributeValue("contextand") == null ? null : e.getAttributeValue("contextand").split("&&"));
 		setContextor(e.getAttributeValue("contextor") == null ? null : e.getAttributeValue("contextor").split("&&"));
+		setIsshow(e.getAttributeValue("isshow") == null || !e.getAttributeValue("isshow").equals("1") ? false : true);
 		if (timeranges != null)
 			Collections.sort(timeranges);
 		childs = getChilds(e);
@@ -237,6 +239,12 @@ public class Clickable implements Comparable<Clickable>{
 	}
 	public void setContextand(String contextand[]) {
 		this.contextand = contextand;
+	}
+	public boolean getIsshow() {
+		return isshow;
+	}
+	public void setIsshow(boolean isshow) {
+		this.isshow = isshow;
 	}
 
 }

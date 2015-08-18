@@ -1,5 +1,19 @@
 package com.me;
 
+import java.awt.Button;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.TextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.ImageProducer;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
@@ -67,23 +81,36 @@ public class Management {
 			System.out.println("login fail!server return null");
 			return false;
 		} else if ( mainpage.contains("验证码")) {
-//			String imageURL = null;
-//			source.clearCache();
-//			source = new Source(mainpage);
-//			imageURL = source.getFirstElement("img").getAttributeValue("src");
-//			formParams.clear();
-//			for (String s : c.getLoginAttrName()) {
-//				for (Element e1 : elements) {
-//					if ((e1.getAttributeValue("name")).equals(s))
-//						formParams.add(new BasicNameValuePair(s, e1.getAttributeValue("value")));
-//				}
-//			}
-			System.out.println("需要验证码");
-			return false;
+			source.clearCache();
+			source = new Source(mainpage);
+			elements = source.getAllElements("anchor").get(1).getAllElements("postfield");
+			formParams.clear();
+			for (String s : c.getVerifyAttrName()) {
+				for (Element e1 : elements) {
+					if (e1.getAttributeValue("name").equals(s))
+						formParams.add(new BasicNameValuePair(s, e1.getAttributeValue("value")));
+				}
+			}
+			uri = source.getAllElements("anchor").get(1).getFirstElement("go").getAttributeValue("href");
+			String verify = getVerify(source, c.getVerifyfresh());
+			formParams.add(new BasicNameValuePair(c.getVerifyname(), verify));
+			mainpage = Browse.getResult(uri, "post", formParams);
+			System.out.println(mainpage);
+			return true;
 		} else
 			return true;
 	}
 	
+	private String getVerify(Source source, String[] verifyfresh) {
+		String imgURL = null;
+		String result = null;
+		Frame frame = new Frame();
+		imgURL = source.getFirstElement("img").getAttributeValue("src");
+		result = new getVerifyCode().getcode(imgURL);
+		return result;
+	}
+
+
 	private boolean match(Source e, Element e1, Clickable c1){
 		if (c1.getInparams() != null && !e1.getAttributeValue("href").replaceAll("&amp;", "&").contains(c1.getInparams()) )
 			return false;
@@ -149,6 +176,8 @@ public class Management {
 					}
 					System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
 					String result = Browse.getResult(e1.getAttributeValue("href"), "get", null);
+					if (c1.getIsshow())
+						System.out.println(result);
 					if (c1.getResultreg() != null )
 						System.out.println(getResult(result, c1.getResultreg()));
 					

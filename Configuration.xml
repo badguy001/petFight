@@ -2,7 +2,8 @@
 
 <login params="sid,sidtype,hiddenPwd,aid,go_url,login_url" host="http://dld.qzapp.z.qq.com" loginNameAttrName="qq" loginPwdAttrName="pwd" userAgent="" 
 	username="1129426277" password="Djh19931004"/>
-<loginverify params="qq,u_token,r,extend,r_sid,aid,hiddenPwd,login_url,go_url,verify" />
+<loginverify params="qq,u_token,r,extend,r_sid,aid,hiddenPwd,login_url,go_url" verifyname="verify"/>
+<verifyfresh params="qq,u_token,r,extend,r_sid,hiddenPwd,login_url,go_url" />
 
 <root host="http://dld.qzapp.z.qq.com" path="/qpet/cgi-bin/phonepk">
 	<mainmenu name="锦标赛" context="锦标赛" order="" notparagrapheand="公告">
@@ -29,7 +30,7 @@
 	
 	</mainmenu>
 	
-	<mainmenu name="菜菜厨房" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=40">
+	<mainmenu name="菜菜厨房" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=newAct&subtype=40" isshow="1">
 	
 	</mainmenu>
 	
@@ -145,7 +146,7 @@
 	</mainmenu>
 	
 	<mainmenu name="好友" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=friendlist">
-	
+		<mainmenu name="boss" context="乐斗" notcontextand="已乐斗" paragrapheand="侠："></mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="帮友" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=viewmem">
@@ -161,12 +162,13 @@
 	</mainmenu>
 	
 	<mainmenu name="我的帮派" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=factionop&subtype=3&facid=5915442">
-		<mainmenu name="帮派守护神" context="帮派守护神" >
+		<mainmenu name="帮派守护神" context="帮派守护神" isshow="">
 			<mainmenu name="享受菜菜大餐" context="享受菜菜大餐" containor="已达六小时&&已达四小时" resultreg="您刚才[^。]+。">
 				<mainmenu name="帮派守护神" context="帮派守护神" >
-					
+					<mainmenu name="找菜菜做菜" contextand="找菜菜做菜" isshow=""></mainmenu>
 				</mainmenu>
 			</mainmenu>
+			<mainmenu name="找菜菜做菜" contextand="找菜菜做菜" isshow=""></mainmenu>
 		</mainmenu>
 	</mainmenu>
 	

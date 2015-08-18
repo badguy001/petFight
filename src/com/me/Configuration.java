@@ -79,6 +79,8 @@ public class Configuration {
 	private String loginNameAttrName;
 	private String loginPwdAttrName;
 	private String[] verifyAttrName;
+	private String verifyname;
+	private String [] verifyfresh;
 	public String[] getVerifyAttrName() {
 		return verifyAttrName;
 	}
@@ -124,6 +126,9 @@ public class Configuration {
 		password = e.getAttributeValue("password");
 		e = source.getFirstElement("loginverify");
 		verifyAttrName = e.getAttributeValue("params").split(",");
+		setVerifyname(e.getAttributeValue("verifyname"));
+		e = source.getFirstElement("verifyfresh");
+		setVerifyfresh(e.getAttributeValue("verifyfresh") == null ? null : e.getAttributeValue("verifyfresh").split(","));
 		root = new Clickable(source.getFirstElement("root"));
 
 	}
@@ -134,5 +139,21 @@ public class Configuration {
 
 	public void setUserAgent(String userAgent) {
 		this.userAgent = userAgent;
+	}
+
+	public String getVerifyname() {
+		return verifyname;
+	}
+
+	public void setVerifyname(String verifyname) {
+		this.verifyname = verifyname;
+	}
+
+	public String [] getVerifyfresh() {
+		return verifyfresh;
+	}
+
+	public void setVerifyfresh(String [] verifyfresh) {
+		this.verifyfresh = verifyfresh;
 	}
 }
