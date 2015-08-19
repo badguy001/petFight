@@ -113,10 +113,10 @@ public class Management {
 			return false;
 		if (c1.getNotcontainand() != null && containsAll(e.toString(), c1.getNotcontainand()))
 			return false;
-		if (c1.getNotcontainor() != null && containsAny(e.toString(), c1.getContainor()))
+		if (c1.getNotcontainor() != null && containsAny(e.toString(), c1.getNotcontainor()))
 			return false;
 
-		String br[] = e.toString().split("<br />");
+		String br[] = e.toString().split("<br");
 		for (String br1:br)
 			if (br1.contains(e1.toString()))
 				if (c1.getParagrapheand() != null && !containsAll(br1, c1.getParagrapheand()))
@@ -167,10 +167,10 @@ public class Management {
 //					System.out.println(Browse.getResult(e1.getAttributeValue("href"), "get", null));
 
 					if (c1.getChilds() != null && c1.getChilds().size() != 0) {
-
 						Do(new Source(Browse.getResult(e1.getAttributeValue("href"), "get", null)), c1);
-
 					}
+					if (c1.isPassthis())
+						Do(new Source(result), c);
 					if (c1.isDisablebelow())
 						break;
 					continue;
