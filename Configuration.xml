@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<login params="sid,sidtype,hiddenPwd,aid,go_url,login_url" host="http://dld.qzapp.z.qq.com" loginNameAttrName="qq" loginPwdAttrName="pwd" userAgent="Mozilla/5.0 (Windows NT 5.2) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30" 
-	username="409966172" password="19890607"/>
+<login params="sid,sidtype,aid,go_url,login_url" host="http://dld.qzapp.z.qq.com" loginNameAttrName="qq" loginPwdAttrName="pwd" userAgent="Mozilla/5.0 (Windows NT 5.2) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30" 
+	username="1129426277" password="Djh19931004"/>
 <loginverify params="qq,u_token,r,extend,r_sid,aid,hiddenPwd,login_url,go_url" verifyname="verify"/>
 <verifyfresh params="qq,u_token,r,extend,r_sid,hiddenPwd,login_url,go_url" />
 
@@ -104,7 +104,9 @@
 	</mainmenu>
 	
 	<mainmenu name="副本" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=pve">
-		
+		<mainmenu name="快速挑战" notcontainand="0/1" contextand="快速挑战" isshow="1">
+			<mainmenu name=""></mainmenu>
+		</mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="许愿" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=wish">
@@ -161,7 +163,7 @@
 	
 	</mainmenu>
 	
-	<mainmenu name="好友" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=friendlist">
+	<mainmenu name="好友" params="zapp_uin,B_UID,sid,channel,g_ut" order="" isshow="" inparams="cmd=friendlist">
 		<mainmenu name="boss" context="乐斗" notcontextand="已乐斗" paragrapheand="侠："></mainmenu>
 	</mainmenu>
 	
@@ -169,7 +171,7 @@
 		<mainmenu name="boss" context="乐斗" notcontextand="已乐斗" paragrapheand="侠："></mainmenu>
 	</mainmenu>
 	
-	<mainmenu name="侠侣" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=viewxialv">
+	<mainmenu name="侠侣" params="zapp_uin,B_UID,sid,channel,g_ut" isshow="1" order="" inparams="cmd=viewxialv">
 		<mainmenu name="boss" context="乐斗" notcontextand="已乐斗" paragrapheand="侠："></mainmenu>
 	</mainmenu>
 	

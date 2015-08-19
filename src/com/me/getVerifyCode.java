@@ -22,9 +22,9 @@ public class getVerifyCode {
 	TextField text = null;
 	Panel p = null;
 	Image img = null;
+	KeyAdapter key = null;
 
 	public getVerifyCode() {
-		String s = null;
 		frame = new Frame();
 		frame.setSize(500, 200);
 		text = new TextField();
@@ -43,25 +43,32 @@ public class getVerifyCode {
 		frame.add(p);
 		// p.setLocation(0, 50);
 		text.setLocation(400, 50);
-		text.addKeyListener(new KeyAdapter() {
+		key = new KeyAdapter() {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					ok = true;
-					text.removeKeyListener(this);
+//					text.removeKeyListener(this);
 					result = text.getText();
 					super.keyPressed(e);
+					synchronized (this){
+						notify();
+					}
 				}
 			}
 
-		});
+		};
+		text.addKeyListener(key);
 		frame.addWindowListener(new WindowAdapter() {
 
 			@Override
 			public void windowClosing(WindowEvent e) {
 				ok = true;
 				super.windowClosing(e);
+				synchronized (key){
+					key.notify();
+				}
 			}
 		});
 	}
@@ -80,13 +87,14 @@ public class getVerifyCode {
 		}
 		frame.setVisible(true);
 		frame.repaint();
-		try {
-
+		synchronized (key){
 			while (!ok) {
-				Thread.sleep(500);
+				try {
+					key.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
 		frame.dispose();
 		return result;

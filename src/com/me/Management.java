@@ -35,12 +35,10 @@ public class Management {
 	
 	public Management() {
 		c = new Configuration();
-		
 	}
 	
 	public boolean login(){
 		String src = null;
-
 		src = Browse.getResult(c.getLoginURL(), "get", null);
 
 		Source source = new Source(src);
