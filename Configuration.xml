@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <login params="sid,sidtype,aid,go_url,login_url" host="http://dld.qzapp.z.qq.com" loginNameAttrName="qq" loginPwdAttrName="pwd" userAgent="Mozilla/5.0 (Windows NT 5.2) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30" 
-	username="1129426277" password="Djh19931004"/>
+	username="409966172" password="19890607"/>
 <loginverify params="qq,u_token,r,extend,r_sid,aid,hiddenPwd,login_url,go_url" verifyname="verify"/>
 <verifyfresh params="qq,u_token,r,extend,r_sid,hiddenPwd,login_url,go_url" />
 
@@ -10,6 +10,10 @@
 <root host="http://dld.qzapp.z.qq.com" path="/qpet/cgi-bin/phonepk">
 	<mainmenu name="获取主页url" order="-100" contextand="乐斗记录">
 		<mainmenu name="获取主页url" contextand="返回大乐斗首页" sethost="1"></mainmenu>
+	</mainmenu>
+	
+	<mainmenu name="登录100QB好礼" contextand="登录100QB好礼">
+	    <mainmenu name="领取" contextand="领取"></mainmenu>
 	</mainmenu>
 	<mainmenu name="锦标赛" context="锦标赛" order="" notparagrapheand="公告">
 		<mainmenu name="领取奖励" contextand="领取奖励">
@@ -81,7 +85,7 @@
 			</mainmenu>
 			<mainmenu name="启程护送" contextand="启程护送"></mainmenu>
 		</mainmenu>
-		<mainmenu name="刷新" contextand="刷新" notcontainand="剩余拦截次数：0">
+		<mainmenu name="刷新" contextand="刷新" notcontainand="剩余拦截次数：0" passthis="1">
 			<mainmenu name="拦截" contextand="拦截" isfight="1" aboveparagrapheor="温良恭"></mainmenu>
 		</mainmenu>
 	</mainmenu>
@@ -91,16 +95,30 @@
 	</mainmenu>
 	
 	<mainmenu name="历练" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=mappush&subtype=1">
-	
+		
 	</mainmenu>
 	
+	<mainmenu name="答题" contextand="答题">
+	    <mainmenu name="选择" contextand="选择" passthis="1" ></mainmenu>
+	</mainmenu>
 	<mainmenu name="炼丹" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=alchemy&subtype=1">
+		<mainmenu name="帮友丹炉" contextand="帮友丹炉">
+		    <mainmenu name="加柴&&强化" contextor="加柴&&强化"></mainmenu>
+		    <mainmenu name="下页" contextand="下页" passthis="1">
+		        <mainmenu name="加柴&&强化" contextor="加柴&&强化"></mainmenu>
+		    </mainmenu>
+		</mainmenu>
+	</mainmenu>
 	
+	<mainmenu name="领取" contextand="领取"></mainmenu>
+	
+	<mainmenu name="传功符" contextand="传功符">
+	    <mainmenu name="领取" contextand="领取"></mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="斗神塔" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=towerfight&type=3">
 		<mainmenu name="结束挑战" context="结束挑战">
-			<mainmenu name="确定" contextand="确定">
+			<mainmenu name="取消" contextand="取消">
 				<mainmenu name="自动挑战" contextand="自动挑战"></mainmenu>
 			</mainmenu>
 		</mainmenu>
@@ -118,7 +136,14 @@
 	</mainmenu>
 	
 	<mainmenu name="许愿" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=wish">
-		
+		<mainmenu name="领取许愿奖励" contextand="领取">
+		    <mainmenu name="许愿" contextand="许愿">
+		        <mainmenu name="领取许愿奖励" contextand="领取"></mainmenu>
+		    </mainmenu>
+		</mainmenu>
+		<mainmenu name="许愿" contextand="许愿">
+		        <mainmenu name="领取许愿奖励" contextand="领取"></mainmenu>
+		</mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="重出江湖" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=callback&subtype=3&page=1">
@@ -218,6 +243,11 @@
 			</mainmenu>
 			<mainmenu name="找菜菜做菜" contextand="找菜菜做菜" isshow=""></mainmenu>
 		</mainmenu>
+		<mainmenu name="贡献度" contextand="贡献度"></mainmenu>
+		<mainmenu name="帮战" contextand="帮战"></mainmenu>
+		<mainmenu name="任务" contextand="任务">
+		    <mainmenu name="领取" contextand="领取"></mainmenu>
+		</mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="武林" params="zapp_uin,B_UID,sid,channel,g_ut" order="101" inparams="cmd=showwulin" timeranges="14:00->23:59,00:00->6:00">
@@ -231,7 +261,9 @@
 	<mainmenu name="结拜" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=brofight&subtype=0">
 	
 	</mainmenu>
-	
+	<mainmenu name="分享" contextand="分享">
+	    <mainmenu name="一键分享" contextand="一键分享"></mainmenu>
+	</mainmenu>
 	<mainmenu name="背包" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=store">
 	
 	</mainmenu>
