@@ -34,6 +34,9 @@ public class Clickable implements Comparable<Clickable>{
 	private boolean isshow;
 	private boolean passthis;
 	private boolean disable;
+	private boolean sethost;
+	private boolean isfight;
+	private String aboveparagrapheor[];
 	public String[] getNotcontextand() {
 		return notcontextand;
 	}
@@ -177,6 +180,9 @@ public class Clickable implements Comparable<Clickable>{
 		setContextor(e.getAttributeValue("contextor") == null ? null : e.getAttributeValue("contextor").split("&&"));
 		setIsshow(e.getAttributeValue("isshow") == null || !e.getAttributeValue("isshow").equals("1") ? false : true);
 		setPassthis(e.getAttributeValue("passthis") == null || !e.getAttributeValue("passthis").equals("1") ? false : true);
+		setSethost(e.getAttributeValue("sethost") == null || !e.getAttributeValue("sethost").equals("1") ? false : true);
+		setIsfight(e.getAttributeValue("isfight") == null || !e.getAttributeValue("isfight").equals("1") ? false : true);
+		setAboveparagraphe(e.getAttributeValue("aboveparagrapheor") == null ? null : e.getAttributeValue("aboveparagrapheor").split("&&"));
 		if (timeranges != null)
 			Collections.sort(timeranges);
 		childs = getChilds(e);
@@ -263,6 +269,24 @@ public class Clickable implements Comparable<Clickable>{
 	}
 	public void setDisable(boolean disable) {
 		this.disable = disable;
+	}
+	public boolean isSethost() {
+		return sethost;
+	}
+	public void setSethost(boolean sethost) {
+		this.sethost = sethost;
+	}
+	public boolean isIsfight() {
+		return isfight;
+	}
+	public void setIsfight(boolean isfight) {
+		this.isfight = isfight;
+	}
+	public String[] getAboveparagraphe() {
+		return aboveparagrapheor;
+	}
+	public void setAboveparagraphe(String aboveparagraphe[]) {
+		this.aboveparagrapheor = aboveparagraphe;
 	}
 
 }

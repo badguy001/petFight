@@ -15,6 +15,13 @@ import net.htmlparser.jericho.Source;
 
 public class Management {
 	private Configuration c;
+	private String host;
+	private String getinfocmd = "cmd=totalinfo&type=1";
+	private String searchqqreg = "(B_UID|passerby_uin)=([0-9]+)";
+	private int qqgroupid = 2;
+	private String hostcmd = "cmd=index";
+	private String searchzhanlireg = "Õ½¶·Á¦</a>:([0-9]+)";
+	private int zhanligroupid = 1;
 	public Configuration getC() {
 		return c;
 	}
@@ -79,7 +86,7 @@ public class Management {
 			String verify = getVerify(source, c.getVerifyfresh());
 			formParams.add(new BasicNameValuePair(c.getVerifyname(), verify));
 			mainpage = Browse.getResult(uri, "post", formParams);
-			System.out.println(mainpage);
+//			System.out.println(mainpage);
 			return true;
 		} else
 			return true;
@@ -117,7 +124,8 @@ public class Management {
 			return false;
 
 		String br[] = e.toString().split("<br");
-		for (String br1:br)
+		for (int i=0;i<br.length;i++){
+			String br1 = br[i];
 			if (br1.contains(e1.toString()))
 				if (c1.getParagrapheand() != null && !containsAll(br1, c1.getParagrapheand()))
 					return false;
@@ -127,7 +135,9 @@ public class Management {
 					return false;
 				else if (c1.getNotparagrapheor() != null && containsAny(br1, c1.getNotparagrapheor()))
 					return false;
-		
+				else if (c1.getAboveparagraphe() != null && i != 0 && !containsAny(br[i-1], c1.getAboveparagraphe()))
+					return false;
+		}
 		return true;
 		
 	}
@@ -156,6 +166,30 @@ public class Management {
 		return false;
 	}
 	
+	public boolean canFight (String url){
+		boolean result = false;
+		Pattern p = Pattern.compile(searchqqreg);
+		Matcher m = p.matcher(url);
+		String qq = null;
+		if (m.find())
+			qq = m.group(qqgroupid); 
+		else 
+			return false;
+		String infourl = host;
+		infourl = infourl.replaceAll(searchqqreg, "B_UID=" + qq);
+		infourl = infourl.replaceAll(hostcmd, getinfocmd);
+		String src = Browse.getResult(infourl, "get", null);
+		p = Pattern.compile(searchzhanlireg);
+		m = p.matcher(src);
+		if (m.find()){
+			if (m.group(zhanligroupid).compareTo(this.c.getMaxzhanli()) < 0)
+				result = true;
+			else result = false;
+		} else return false;
+			
+		return result;
+	}
+	
 	public void Do(Source e, Clickable c) {
 		List<Element> urls = e.getAllElements("a");
 		
@@ -173,6 +207,15 @@ public class Management {
 						continue;
 					}
 					System.out.println(c1.getName() + ":" + e1.getAttributeValue("href"));
+					if (c1.isSethost()){
+						host = e1.getAttributeValue("href");
+						System.out.println(host);
+						continue;
+					}
+					if (c1.isIsfight()){
+						if (!canFight(e1.getAttributeValue("href")))
+							continue;
+					}
 					String result = Browse.getResult(e1.getAttributeValue("href"), "get", null);
 					if (c1.getIsshow())
 						System.out.println(result);

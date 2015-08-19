@@ -17,6 +17,9 @@ public class Configuration {
 	private String loginURL;
 	private String username;
 	private Clickable root;
+	private String maxzhanli;
+	private String maxlevel;
+	private String minlevel;
 	public Clickable getRoot() {
 		return root;
 	}
@@ -130,7 +133,10 @@ public class Configuration {
 		e = source.getFirstElement("verifyfresh");
 		setVerifyfresh(e.getAttributeValue("params") == null ? null : e.getAttributeValue("params").split(","));
 		root = new Clickable(source.getFirstElement("root"));
-
+		e = source.getFirstElement("fightconfig");
+		maxzhanli = e.getAttributeValue("maxzhanli");
+		maxlevel = e.getAttributeValue("maxlevel");
+		minlevel = e.getAttributeValue("minlevel");
 	}
 	
 	public String getUserAgent() {
@@ -155,5 +161,37 @@ public class Configuration {
 
 	public void setVerifyfresh(String [] verifyfresh) {
 		this.verifyfresh = verifyfresh;
+	}
+
+	public String getMaxzhanli() {
+		return maxzhanli;
+	}
+
+	public void setMaxzhanli(String maxzhanli) {
+		this.maxzhanli = maxzhanli;
+	}
+
+	public String getMaxlevel() {
+		return maxlevel;
+	}
+
+	public void setMaxlevel(String maxlevel) {
+		this.maxlevel = maxlevel;
+	}
+
+	public String getMinlevel() {
+		return minlevel;
+	}
+
+	public void setMinlevel(String minlevel) {
+		this.minlevel = minlevel;
+	}
+
+	public String getConfPath() {
+		return confPath;
+	}
+
+	public void setConfPath(String confPath) {
+		this.confPath = confPath;
 	}
 }

@@ -5,7 +5,12 @@
 <loginverify params="qq,u_token,r,extend,r_sid,aid,hiddenPwd,login_url,go_url" verifyname="verify"/>
 <verifyfresh params="qq,u_token,r,extend,r_sid,hiddenPwd,login_url,go_url" />
 
+<fightconfig maxzhanli="350" maxlevel="" minlevel="" />
+
 <root host="http://dld.qzapp.z.qq.com" path="/qpet/cgi-bin/phonepk">
+	<mainmenu name="获取主页url" order="-100" contextand="乐斗记录">
+		<mainmenu name="获取主页url" contextand="返回大乐斗首页" sethost="1"></mainmenu>
+	</mainmenu>
 	<mainmenu name="锦标赛" context="锦标赛" order="" notparagrapheand="公告">
 		<mainmenu name="领取奖励" contextand="领取奖励">
 			<mainmenu name="赞助" context="赞助" paragrapheor="菜菜&&月敏" notcontainand="免费赞助：0"></mainmenu>
@@ -64,7 +69,7 @@
 	
 	</mainmenu>
 	
-	<mainmenu name="镖行天下" params="zapp_uin,B_UID,sid,channel,g_ut" order="1" inparams="cmd=cargo">
+	<mainmenu name="镖行天下" params="zapp_uin,B_UID,sid,channel,g_ut" order="-2" inparams="cmd=cargo">
 		<mainmenu name="护送完成" params="zapp_uin,sid,channel,g_ut" order="1" inparams="cmd=cargo&op=15" contain="护送完成">
 			<mainmenu name="领取奖励" order="1" inparams="cmd=cargo&op=16">
 			
@@ -75,6 +80,9 @@
 				<mainmenu name="启程护送" contextand="启程护送"></mainmenu>
 			</mainmenu>
 			<mainmenu name="启程护送" contextand="启程护送"></mainmenu>
+		</mainmenu>
+		<mainmenu name="刷新" contextand="刷新" notcontainand="剩余拦截次数：0">
+			<mainmenu name="拦截" contextand="拦截" isfight="1" aboveparagrapheor="温良恭"></mainmenu>
 		</mainmenu>
 	</mainmenu>
 	
