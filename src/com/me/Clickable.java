@@ -33,6 +33,7 @@ public class Clickable implements Comparable<Clickable>{
 	private String contextor[];
 	private boolean isshow;
 	private boolean passthis;
+	private boolean disable;
 	public String[] getNotcontextand() {
 		return notcontextand;
 	}
@@ -148,6 +149,9 @@ public class Clickable implements Comparable<Clickable>{
 		this.order = order;
 	}
 	public Clickable(Element e) {
+		setDisable(e.getAttributeValue("disable") == null || !e.getAttributeValue("disable").equals("1") ? false : true);
+		if (isDisable())
+			return;
 		params = e.getAttributeValue("params") == null ? null : e.getAttributeValue("params").split(",");
 		setInparams(e.getAttributeValue("inparams"));
 		setName(e.getAttributeValue("name"));
@@ -253,6 +257,12 @@ public class Clickable implements Comparable<Clickable>{
 	}
 	public void setPassthis(boolean passthis) {
 		this.passthis = passthis;
+	}
+	public boolean isDisable() {
+		return disable;
+	}
+	public void setDisable(boolean disable) {
+		this.disable = disable;
 	}
 
 }

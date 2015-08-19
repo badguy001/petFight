@@ -132,23 +132,38 @@ public class Management {
 		
 	}
 	private boolean containsAll(String src, String e[]){
-		for (String s:e)
-			if (!src.contains(s))
+		Pattern p;
+		Matcher m;
+		for (String s:e){
+			p = Pattern.compile(s);
+			m = p.matcher(src);
+			if (!m.find())
 				return false;
+			m.reset();
+		}
 		return true;
 	}
 	private boolean containsAny(String src, String e[]){
-		for (String s:e)
-			if (src.contains(s))
+		Pattern p;
+		Matcher m;
+		for (String s:e){
+			p = Pattern.compile(s);
+			m = p.matcher(src);
+			if (m.find())
 				return true;
+			m.reset();
+		}
 		return false;
 	}
 	
 	public void Do(Source e, Clickable c) {
 		List<Element> urls = e.getAllElements("a");
-
+		
 		for (Clickable c1 : c.getChilds()) {
+			if (c1.isDisable())
+				continue;
 			for (Element e1 : urls) {
+
 				if (match(e, e1, c1)) {
 					if (c1.getFreshtime() > 0) {
 						new Thread(new FreshThread(e1, c1)).start();
