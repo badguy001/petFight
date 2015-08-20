@@ -44,6 +44,22 @@ public class Management {
 		c = new Configuration();
 	}
 	
+	public boolean login(String host[]){
+		if (host == null)
+			return false;
+		for(String s:host){
+			if ( s.contains(c.getUsername()) ) {
+				String src = Browse.getResult(s, "get", null);
+				if (src.contains("¶·ÓÑ")){
+					mainpage = src;
+					this.host = s;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public boolean login(){
 		String src = null;
 		src = Browse.getResult(c.getLoginURL(), "get", null);
@@ -222,10 +238,15 @@ public class Management {
 					if (c1.getResultreg() != null )
 						System.out.println(getResult(result, c1.getResultreg()));
 					
-//					System.out.println(Browse.getResult(e1.getAttributeValue("href"), "get", null));
-
 					if (c1.getChilds() != null && c1.getChilds().size() != 0) {
 						Do(new Source(Browse.getResult(e1.getAttributeValue("href"), "get", null)), c1);
+					}
+					if (c1.getWaittime() > 0){
+						try {
+							Thread.sleep(c1.getWaittime() * 1000);
+						} catch (InterruptedException e2) {
+							e2.printStackTrace();
+						}
 					}
 					if (c1.isPassthis())
 						Do(new Source(result), c);
@@ -268,12 +289,10 @@ public class Management {
 //				System.out.println(Browse.getResult(e1.getAttributeValue("href"), "get", null));
 
 				if (c1.getChilds() != null && c1.getChilds().size() != 0) {
-
 					Do(new Source(Browse.getResult(e1.getAttributeValue("href"), "get", null)), c1);
-
 				}
 				try {
-					Thread.sleep(c1.getFreshwait());
+					Thread.sleep(c1.getFreshwait()*1000);
 				} catch (InterruptedException e2) {
 					e2.printStackTrace();
 				}
@@ -318,6 +337,14 @@ public class Management {
 			}
 		}
 
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
 	}
 	
 }

@@ -79,13 +79,13 @@
 			
 			</mainmenu>
 		</mainmenu>
-		<mainmenu name="护送押镖" context="护送押镖">
+		<mainmenu name="护送押镖" context="护送押镖" notcontainand="剩余护送次数：0">
 			<mainmenu name="刷新镖师" contextand="刷新镖师" notcontextand="消耗">
 				<mainmenu name="启程护送" contextand="启程护送"></mainmenu>
 			</mainmenu>
 			<mainmenu name="启程护送" contextand="启程护送"></mainmenu>
 		</mainmenu>
-		<mainmenu name="刷新" contextand="刷新" notcontainand="剩余拦截次数：0" passthis="1">
+		<mainmenu name="刷新" contextand="刷新" notcontainand="剩余拦截次数：0" passthis="1" waittime="5">
 			<mainmenu name="拦截" contextand="拦截" isfight="1" aboveparagrapheor="温良恭"></mainmenu>
 		</mainmenu>
 	</mainmenu>
@@ -101,11 +101,12 @@
 	<mainmenu name="答题" contextand="答题">
 	    <mainmenu name="选择" contextand="选择" passthis="1" ></mainmenu>
 	</mainmenu>
-	<mainmenu name="炼丹" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=alchemy&subtype=1">
+	
+	<mainmenu disable="1" name="炼丹" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=alchemy&subtype=1">
 		<mainmenu name="帮友丹炉" contextand="帮友丹炉">
-		    <mainmenu name="加柴&&强化" contextor="加柴&&强化"></mainmenu>
+		    <mainmenu name="加柴&&强化" contextor="加柴&&强化" notcontainand="强化次数已达上限"></mainmenu>
 		    <mainmenu name="下页" contextand="下页" passthis="1">
-		        <mainmenu name="加柴&&强化" contextor="加柴&&强化"></mainmenu>
+		        <mainmenu name="加柴&&强化" contextor="加柴&&强化" notcontainand="强化次数已达上限"></mainmenu>
 		    </mainmenu>
 		</mainmenu>
 	</mainmenu>
@@ -117,12 +118,12 @@
 	</mainmenu>
 	
 	<mainmenu name="斗神塔" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=towerfight&type=3">
-		<mainmenu name="结束挑战" context="结束挑战">
+		<mainmenu name="结束挑战" context="结束挑战" notcontainand="剩余次数：0/1">
 			<mainmenu name="取消" contextand="取消">
 				<mainmenu name="自动挑战" contextand="自动挑战"></mainmenu>
 			</mainmenu>
 		</mainmenu>
-		<mainmenu name="自动挑战" contextand="自动挑战"></mainmenu>
+		<mainmenu name="自动挑战" contextand="自动挑战" notcontainand="剩余次数：0/1"></mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="抢地盘" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=recommendmanor&type=4&page=1">
@@ -173,16 +174,16 @@
 		</mainmenu>
 	</mainmenu>
 	
-	<mainmenu name="巅峰之战" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=gvg&sub=0">
+	<mainmenu name="巅峰之战" params="zapp_uin,B_UID,sid,channel,g_ut" order="100" inparams="cmd=gvg&sub=0">
 		<mainmenu name="领奖" inparams="cmd=gvg&sub=1" context="领奖">
 		</mainmenu>
 		
-		<mainmenu name="征战" context="征战" freshtime="10" freshwait="1800" notcotainand="挑战次数已达上限">
+		<mainmenu disable="1" name="征战" context="征战" passthis="1" waittime="180" notcotainand="用完复活次数">
 		</mainmenu>
 	</mainmenu>
 	
-	<mainmenu name="斗友" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=friendlist&type=1">
-		<mainmenu name="乐斗" contextand="乐斗" notcontextand="已乐斗" paragrapheor="54级" notcontainor="：[ ]*[0-9]{1}/100&&上限" disablebelow="1" passthis="1"></mainmenu>
+	<mainmenu name="斗友" params="zapp_uin,B_UID,sid,channel,g_ut" order="1" inparams="cmd=friendlist&type=1">
+		<mainmenu name="乐斗" contextand="乐斗" notcontextand="已乐斗" isfight="1" notcontainor="当前体力值：[ ]*[0-9]{1}/100&&上限" passthis="1" disablebelow="1"></mainmenu>
 	</mainmenu>
 	
 	<mainmenu name="好友" params="zapp_uin,B_UID,sid,channel,g_ut" contextand="好友" order="-2" isshow="" inparams="cmd=friendlist">
@@ -262,7 +263,7 @@
 	
 	</mainmenu>
 	<mainmenu name="分享" contextand="分享">
-	    <mainmenu name="一键分享" contextand="一键分享"></mainmenu>
+	    <mainmenu name="一键分享" contextand="一键分享" notcontainand="6/6"></mainmenu>
 	</mainmenu>
 	<mainmenu name="背包" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=store">
 	

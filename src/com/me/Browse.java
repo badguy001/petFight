@@ -25,11 +25,22 @@ import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
 
 public class Browse {
-	private static CookieStore cookieStore = new BasicCookieStore();
-	private static CloseableHttpClient httpclient = HttpClients.custom().setDefaultCookieStore(cookieStore)
-			.setUserAgent("Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)")
-			.build();
+	private static CookieStore cookieStore;
+	private static CloseableHttpClient httpclient;
 
+	public static boolean init(){
+		cookieStore = new BasicCookieStore();
+		init(cookieStore);
+		return true;
+	}
+	
+	public static boolean init(CookieStore cookieStore){
+		httpclient = HttpClients.custom().setDefaultCookieStore(cookieStore)
+//				.setUserAgent("Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)")
+				.build();
+		return true;
+	}
+	
 	public static String getResult(String sURI, String method, List<NameValuePair> formParams) {
 		String result = new String();
 		HttpGet httpget = null;
@@ -102,7 +113,8 @@ public class Browse {
 		}
 			
 	}
-
+	
+	
 	public static void destroy() {
 		System.out.println("destroy httpclient");
 		cookieStore.clear();
@@ -113,5 +125,13 @@ public class Browse {
 			System.out.println("wrong, when httpclient close!");
 			e.printStackTrace();
 		}
+	}
+
+	public static CookieStore getCookieStore() {
+		return cookieStore;
+	}
+
+	public static void setCookieStore(CookieStore cookieStore) {
+		Browse.cookieStore = cookieStore;
 	}
 }

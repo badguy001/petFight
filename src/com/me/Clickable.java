@@ -37,6 +37,7 @@ public class Clickable implements Comparable<Clickable>{
 	private boolean sethost;
 	private boolean isfight;
 	private String aboveparagrapheor[];
+	private int waittime;
 	public String[] getNotcontextand() {
 		return notcontextand;
 	}
@@ -183,6 +184,7 @@ public class Clickable implements Comparable<Clickable>{
 		setSethost(e.getAttributeValue("sethost") == null || !e.getAttributeValue("sethost").equals("1") ? false : true);
 		setIsfight(e.getAttributeValue("isfight") == null || !e.getAttributeValue("isfight").equals("1") ? false : true);
 		setAboveparagraphe(e.getAttributeValue("aboveparagrapheor") == null ? null : e.getAttributeValue("aboveparagrapheor").split("&&"));
+		setWaittime(e.getAttributeValue("waittime") == null || e.getAttributeValue("waittime").equals("") ? 0 : Integer.valueOf(e.getAttributeValue("waittime")));
 		if (timeranges != null)
 			Collections.sort(timeranges);
 		childs = getChilds(e);
@@ -287,6 +289,12 @@ public class Clickable implements Comparable<Clickable>{
 	}
 	public void setAboveparagraphe(String aboveparagraphe[]) {
 		this.aboveparagrapheor = aboveparagraphe;
+	}
+	public int getWaittime() {
+		return waittime;
+	}
+	public void setWaittime(int waittime) {
+		this.waittime = waittime;
 	}
 
 }
