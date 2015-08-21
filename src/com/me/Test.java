@@ -19,24 +19,27 @@ public class Test {
 	private static final String cookieStoreFile = "Cookie"; 
 	private static final String hostsFile = "hosts";
 	public static void main(String[] args) {
-		Management m = new Management();
-		CookieStore cookiestore = new Test().getcookie();
-		if (cookiestore != null){
-			Browse.init(cookiestore);
-		} else {
-			Browse.init();
-		}
-		if (!m.login(new Test().gethosts()))
-			if (!m.login()) {
-				System.out.println("login fail!");
-				System.exit(0);
-			}
-			else {}
-		else 
+		Browse.init();
+		User m = new User("409966172", "http://dld.qzapp.z.qq.com/qpet/cgi-bin/phonepk?zapp_uin=409966172&B_UID=409966172&sid=AeY0uNBtPqwJex24MtVcMY5E&channel=0&g_ut=1&cmd=index");
+//		CookieStore cookiestore = new Test().getcookie();
+//		if (cookiestore != null){
+//			Browse.init(cookiestore);
+//		} else {
+//			Browse.init();
+//		}
+//		if (!m.login(new Test().gethosts()))
+//			if (!m.login()) {
+//				System.out.println("login fail!");
+//				System.exit(0);
+//			}
+//			else {}
+//		else 
+//			System.out.println("√‚√‹¬Îµ«¬º");
+		if (m.logined)
 			System.out.println("√‚√‹¬Îµ«¬º");
-		m.Do(new Source(m.getMainpage()), m.getC().getRoot());
-		new Test().savecookie(Browse.getCookieStore());
-		new Test().savehost(m.getHost());
+		m.Do();
+//		new Test().savecookie(Browse.getCookieStore());
+//		new Test().savehost(m.getHost());
 	}
 	
 	private CookieStore getcookie(){

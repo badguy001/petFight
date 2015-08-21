@@ -4,21 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.htmlparser.jericho.Element;
+import org.dom4j.Element;
 
-public class Clickable implements Comparable<Clickable>{
+
+
+public class Filter implements Comparable<Filter>{
 	private String containor[];
-	private String contain;
 	private String name;
-	private String params[];
 	private String inparams;
 	private int order;
 	private String context;
-	private int freshtime;
 	private List<TimeRange> timeranges;
 	private String containand[];
-	private int freshwait;
-	List<Clickable> childs;
+	List<Filter> childs;
 	private String paragrapheand[];
 	private String paragrapheor[];
 	private String notparagrapheand[];
@@ -34,7 +32,6 @@ public class Clickable implements Comparable<Clickable>{
 	private boolean isshow;
 	private boolean passthis;
 	private boolean disable;
-	private boolean sethost;
 	private boolean isfight;
 	private String aboveparagrapheor[];
 	private int waittime;
@@ -86,29 +83,17 @@ public class Clickable implements Comparable<Clickable>{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String[] getParams() {
-		return params;
-	}
-	public void setParams(String[] params) {
-		this.params = params;
-	}
 	public String getInparams() {
 		return inparams;
 	}
 	public void setInparams(String inparams) {
 		this.inparams = inparams;
 	}
-	public List<Clickable> getChilds() {
+	public List<Filter> getChilds() {
 		return childs;
 	}
-	public void setChilds(List<Clickable> childs) {
+	public void setChilds(List<Filter> childs) {
 		this.childs = childs;
-	}
-	public String getContain() {
-		return contain;
-	}
-	public void setContain(String contian) {
-		this.contain = contian;
 	}
 	public String[] getContainand() {
 		return containand;
@@ -128,18 +113,6 @@ public class Clickable implements Comparable<Clickable>{
 	public void setTimeranges(List<TimeRange> timeranges) {
 		this.timeranges = timeranges;
 	}
-	public int getFreshtime() {
-		return freshtime;
-	}
-	public void setFreshtime(int freshtime) {
-		this.freshtime = freshtime;
-	}
-	public int getFreshwait() {
-		return freshwait;
-	}
-	public void setFreshwait(int freshwait) {
-		this.freshwait = freshwait;
-	}
 	public String getContext() {
 		return context;
 	}
@@ -152,39 +125,34 @@ public class Clickable implements Comparable<Clickable>{
 	public void setOrder(int order) {
 		this.order = order;
 	}
-	public Clickable(Element e) {
-		setDisable(e.getAttributeValue("disable") == null || !e.getAttributeValue("disable").equals("1") ? false : true);
+	public Filter(Element e) {
+		setDisable(e.attributeValue(StaticVar.disable) == null || !e.attributeValue(StaticVar.disable).equals("1") ? false : true);
 		if (isDisable())
 			return;
-		params = e.getAttributeValue("params") == null ? null : e.getAttributeValue("params").split(",");
-		setInparams(e.getAttributeValue("inparams"));
-		setName(e.getAttributeValue("name"));
-		setOrder(e.getAttributeValue("order") == null || e.getAttributeValue("order").equals("") ? 100 : Integer.valueOf(e.getAttributeValue("order")));
-		setContain(e.getAttributeValue("contain"));
-		setContext(e.getAttributeValue("context"));
-		setFreshtime(e.getAttributeValue("freshtime") == null || e.getAttributeValue("freshtime").equals("") ? 0 : Integer.valueOf(e.getAttributeValue("freshtime")));
-		setFreshwait(e.getAttributeValue("freshwait") == null || e.getAttributeValue("freshwait").equals("") ? 0 : Integer.valueOf(e.getAttributeValue("freshwait")));
-		setTimeranges(getTimeranges(e.getAttributeValue("timeranges")));
-		setContainand(e.getAttributeValue("containand") == null ? null : e.getAttributeValue("containand").split("&&"));
-		setContainor(e.getAttributeValue("containor") == null ? null : e.getAttributeValue("containor").split("&&"));
-		setParagrapheand(e.getAttributeValue("paragrapheand") == null ? null : e.getAttributeValue("paragrapheand").split("&&"));
-		setParagrapheor(e.getAttributeValue("paragrapheor") == null ? null : e.getAttributeValue("paragrapheor").split("&&"));
-		setNotparagrapheand(e.getAttributeValue("notparagrapheand") == null ? null : e.getAttributeValue("notparagrapheand").split("&&"));
-		setNotparagrapheor(e.getAttributeValue("notparagrapheor") == null ? null : e.getAttributeValue("notparagrapheor").split("&&"));
-		setNotcontainand(e.getAttributeValue("notcontainand") == null ? null : e.getAttributeValue("notcontainand").split("&&"));
-		setNotcontainor(e.getAttributeValue("notcontainor") == null ? null : e.getAttributeValue("notcontainor").split("&&"));
-		setNotcontextand(e.getAttributeValue("notcontextand") == null ? null : e.getAttributeValue("notcontextand").split("&&"));
-		setNotcontextor(e.getAttributeValue("notcontextor") == null ? null : e.getAttributeValue("notcontextor").split("&&"));
-		setDisablebelow(e.getAttributeValue("disablebelow") == null || Integer.valueOf(e.getAttributeValue("disablebelow")) != 1 ? false : true ); 
-		setResultreg(e.getAttributeValue("resultreg") == null || e.getAttributeValue("resultreg").equals("") ? null : e.getAttributeValue("resultreg").split("&&"));
-		setContextand(e.getAttributeValue("contextand") == null ? null : e.getAttributeValue("contextand").split("&&"));
-		setContextor(e.getAttributeValue("contextor") == null ? null : e.getAttributeValue("contextor").split("&&"));
-		setIsshow(e.getAttributeValue("isshow") == null || !e.getAttributeValue("isshow").equals("1") ? false : true);
-		setPassthis(e.getAttributeValue("passthis") == null || !e.getAttributeValue("passthis").equals("1") ? false : true);
-		setSethost(e.getAttributeValue("sethost") == null || !e.getAttributeValue("sethost").equals("1") ? false : true);
-		setIsfight(e.getAttributeValue("isfight") == null || !e.getAttributeValue("isfight").equals("1") ? false : true);
-		setAboveparagraphe(e.getAttributeValue("aboveparagrapheor") == null ? null : e.getAttributeValue("aboveparagrapheor").split("&&"));
-		setWaittime(e.getAttributeValue("waittime") == null || e.getAttributeValue("waittime").equals("") ? 0 : Integer.valueOf(e.getAttributeValue("waittime")));
+		setInparams(e.attributeValue(StaticVar.inparams) == null || e.attributeValue(StaticVar.inparams).equals("") ? null : e.attributeValue(StaticVar.inparams));
+		setName(e.attributeValue(StaticVar.name) == null || e.attributeValue(StaticVar.name).equals("") ? null : e.attributeValue(StaticVar.name));
+		setOrder(e.attributeValue(StaticVar.order) == null || e.attributeValue(StaticVar.order).equals("") ? 100 : Integer.valueOf(e.attributeValue(StaticVar.order)));
+		setContext(e.attributeValue(StaticVar.context) == null || e.attributeValue(StaticVar.context).equals("") ? null : e.attributeValue(StaticVar.context));
+		setTimeranges(getTimeranges(e.attributeValue(StaticVar.timeranges)));
+		setContainand(e.attributeValue(StaticVar.containand) == null || e.attributeValue(StaticVar.containand).equals("") ? null : e.attributeValue(StaticVar.containand).split(StaticVar.SpiltString));
+		setContainor(e.attributeValue(StaticVar.containor) == null || e.attributeValue(StaticVar.containor).equals("") ? null : e.attributeValue(StaticVar.containor).split(StaticVar.containor));
+		setParagrapheand(e.attributeValue(StaticVar.paragrapheand) == null || e.attributeValue(StaticVar.paragrapheand).equals("") ? null : e.attributeValue(StaticVar.paragrapheand).split(StaticVar.SpiltString));
+		setParagrapheor(e.attributeValue(StaticVar.paragrapheor) == null || e.attributeValue(StaticVar.paragrapheor).equals("") ? null : e.attributeValue(StaticVar.paragrapheor).split(StaticVar.SpiltString));
+		setNotparagrapheand(e.attributeValue(StaticVar.notparagrapheand) == null || e.attributeValue(StaticVar.notparagrapheand).equals("") ? null : e.attributeValue(StaticVar.notparagrapheand).split(StaticVar.SpiltString));
+		setNotparagrapheor(e.attributeValue(StaticVar.notparagrapheor) == null || e.attributeValue(StaticVar.notparagrapheor).equals("") ? null : e.attributeValue(StaticVar.notparagrapheor).split(StaticVar.SpiltString));
+		setNotcontainand(e.attributeValue(StaticVar.notcontainand) == null || e.attributeValue(StaticVar.notcontainand).equals("") ? null : e.attributeValue(StaticVar.notcontainand).split(StaticVar.SpiltString));
+		setNotcontainor(e.attributeValue(StaticVar.notcontainor) == null || e.attributeValue(StaticVar.notcontainor).equals("") ? null : e.attributeValue(StaticVar.notcontainor).split(StaticVar.SpiltString));
+		setNotcontextand(e.attributeValue(StaticVar.notcontextand) == null || e.attributeValue(StaticVar.notcontextand).equals("") ? null : e.attributeValue(StaticVar.notcontextand).split(StaticVar.SpiltString));
+		setNotcontextor(e.attributeValue(StaticVar.notcontextor) == null ? null : e.attributeValue(StaticVar.notcontextor).split(StaticVar.SpiltString));
+		setDisablebelow(e.attributeValue(StaticVar.disablebelow) == null || !e.attributeValue(StaticVar.disablebelow).equals("1") ? false : true ); 
+		setResultreg(e.attributeValue(StaticVar.resultreg) == null || e.attributeValue(StaticVar.resultreg).equals("") ? null : e.attributeValue(StaticVar.resultreg).split(StaticVar.SpiltString));
+		setContextand(e.attributeValue(StaticVar.contextand) == null || e.attributeValue(StaticVar.contextand).equals("") ? null : e.attributeValue(StaticVar.contextand).split(StaticVar.SpiltString));
+		setContextor(e.attributeValue(StaticVar.contextor) == null || e.attributeValue(StaticVar.contextor).equals("") ? null : e.attributeValue(StaticVar.contextor).split(StaticVar.SpiltString));
+		setIsshow(e.attributeValue(StaticVar.isshow) == null || !e.attributeValue(StaticVar.isshow).equals("1") ? false : true);
+		setPassthis(e.attributeValue(StaticVar.passthis) == null || !e.attributeValue(StaticVar.passthis).equals("1") ? false : true);
+		setIsfight(e.attributeValue(StaticVar.isfight) == null || !e.attributeValue(StaticVar.isfight).equals("1") ? false : true);
+		setAboveparagraphe(e.attributeValue(StaticVar.aboveparagrapheor) == null || e.attributeValue(StaticVar.aboveparagrapheor).equals("") ? null : e.attributeValue(StaticVar.aboveparagrapheor).split(StaticVar.SpiltString));
+		setWaittime(e.attributeValue(StaticVar.waittime) == null || e.attributeValue(StaticVar.waittime).equals("") ? 0 : Integer.valueOf(e.attributeValue(StaticVar.waittime)));
 		if (timeranges != null)
 			Collections.sort(timeranges);
 		childs = getChilds(e);
@@ -203,20 +171,20 @@ public class Clickable implements Comparable<Clickable>{
 		return l;
 	}
 	
-	private List<Clickable> getChilds(Element e) {
-		List<Clickable> l = null;
-		List<Element> childs = e.getChildElements();
+	private List<Filter> getChilds(Element e) {
+		List<Filter> l = null;
+		List<Element> childs = e.elements();
 		if (childs.size()==0)
 			return l;
 		l = new ArrayList<>();
 		for (Element e1:childs) {
-			Clickable c = new Clickable(e1);
+			Filter c = new Filter(e1);
 			l.add(c);
 		}
 		return l;
 	}
 	
-	public int compareTo(Clickable o) {
+	public int compareTo(Filter o) {
 		if (order > o.order)
 			return 1;
 		else if (order == o.order)
@@ -271,12 +239,6 @@ public class Clickable implements Comparable<Clickable>{
 	}
 	public void setDisable(boolean disable) {
 		this.disable = disable;
-	}
-	public boolean isSethost() {
-		return sethost;
-	}
-	public void setSethost(boolean sethost) {
-		this.sethost = sethost;
 	}
 	public boolean isIsfight() {
 		return isfight;
