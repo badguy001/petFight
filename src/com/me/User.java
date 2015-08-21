@@ -82,7 +82,7 @@ public class User {
 		String br[] = body.asXML().split("<br");
 		for (int i=0;i<br.length;i++){
 			String br1 = br[i];
-			if (br1.contains(e1.toString()))
+			if (br1.contains(e1.asXML()))
 				if (c1.getParagrapheand() != null && !containsAll(br1, c1.getParagrapheand()))
 					return false;
 				else if (c1.getParagrapheor() != null && !containsAny(br1, c1.getParagrapheor()))
@@ -160,6 +160,8 @@ public class User {
 	}
 	
 	public void Do(String src, Filter c) {
+		if (src == null)
+			return;
 		src = src.replaceAll("<!DOCTYPE[^>]+>", "");
 		src = src.replaceAll("&nbsp", "");
 		Document doc = null;
