@@ -17,6 +17,7 @@ public class User {
 	private String userName;
 	private String host;
 	private String zhanli;
+	private String level;
 	private PersonnalFilter personnalFilter;
 	private static final String judgeLoginReg = "斗友";
 	private String getinfocmd = "cmd=totalinfo&type=1";
@@ -24,6 +25,8 @@ public class User {
 	private int qqgroupid = 2;
 	private String hostcmd = "cmd=index";
 	private String searchzhanlireg = "战斗力</a>:([0-9]+)";
+	private static String searchlevelreg = "等级:([0-9]+)";
+	private static int levelgroupid = 1;
 	private int zhanligroupid = 1;
 	public boolean logined;
 	public String getMainpage() {
@@ -46,11 +49,17 @@ public class User {
 		personnalFilter = new PersonnalFilter(userName);
 		this.userName = userName;
 		this.host = host;
+		p = Pattern.compile(searchlevelreg);
+		m = p.matcher(mainpage);
+		if (m.find())
+			level = m.group(levelgroupid);
 		p = Pattern.compile(searchzhanlireg);
 		m = p.matcher(mainpage);
 		if (m.find())
 			zhanli = m.group(zhanligroupid);
-		personnalFilter.setZhanli(String.valueOf(Integer.valueOf(zhanli) - 50));
+		personnalFilter.setZhanli(String.valueOf((Integer.valueOf(zhanli) - Integer.valueOf(level))));
+		personnalFilter.setMaxLevel(String.valueOf(Integer.valueOf(level) + 5));
+		personnalFilter.setMinLevel(String.valueOf(Integer.valueOf(level) - 5));
 		logined = true;
 	}
 	
@@ -93,6 +102,10 @@ public class User {
 					return false;
 				else if (c1.getAboveparagraphe() != null && i != 0 && !containsAny(br[i-1], c1.getAboveparagraphe()))
 					return false;
+				else if (c1.getBelowparagrapheor() != null && i+1 != br.length && !containsAny(br[i+1], c1.getBelowparagrapheor()))
+					return false;
+				else if (c1.getBelowparagraphe() != null && i+1 != br.length && !br[i+1].equals(c1.getBelowparagraphe()))
+					return false;
 		}
 		return true;
 		
@@ -133,17 +146,27 @@ public class User {
 			return false;
 		String infourl = host;
 		infourl = infourl.replaceAll(searchqqreg, "B_UID=" + qq);
+		if (!infourl.contains("&B_UID="))
+			infourl = infourl + "&B_UID=" + qq;
 		infourl = infourl.replaceAll(hostcmd, getinfocmd);
 		String src = Browse.getResult(infourl, "get", null);
 		p = Pattern.compile(searchzhanlireg);
 		m = p.matcher(src);
 		if (m.find()){
-			if (m.group(zhanligroupid).compareTo(personnalFilter.getMaxzhanli()) < 0)
-				result = true;
-			else result = false;
+			String tmp = m.group(zhanligroupid);
+			if ( Integer.valueOf(tmp) > Integer.valueOf(personnalFilter.getMaxzhanli()) )
+				return false;
 		} else return false;
-			
-		return result;
+		if (url.contains("cmd=cargo"))
+			return true;
+		p = Pattern.compile(searchlevelreg);
+		m = p.matcher(src);
+		if (m.find()){
+			String level = m.group(levelgroupid);
+			if (Integer.valueOf(level) > Integer.valueOf(personnalFilter.getMaxLevel()) || Integer.valueOf(level) < Integer.valueOf(personnalFilter.getMinLevel()) )
+				return false;
+		} else return false;
+		return true;
 	}
 	
 	private List<Element> getURLs(List<Element> l, String tagName){
@@ -160,6 +183,11 @@ public class User {
 	}
 	
 	public void Do(String src, Filter c) {
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e3) {
+			e3.printStackTrace();
+		}
 		if (src == null)
 			return;
 		src = src.replaceAll("<!DOCTYPE[^>]+>", "");
@@ -182,13 +210,15 @@ public class User {
 						new Schedule(e1, c1).begin();
 						continue;
 					}
-					String URL = e1.attributeValue("href");
-					System.out.println(c1.getName() + ":" + URL);
 
+					String URL = e1.attributeValue("href");
 					if (c1.isIsfight()){
 						if (!canFight(URL))
 							continue;
 					}
+					System.out.println(c1.getName() + ":" + URL);
+
+
 					String result = Browse.getResult(URL, "get", null);
 					if (c1.getIsshow())
 						System.out.println(result);

@@ -34,6 +34,9 @@ public class Filter implements Comparable<Filter>{
 	private boolean disable;
 	private boolean isfight;
 	private String aboveparagrapheor[];
+	private String belowparagrapheor[];
+	private String belowparagrapheand[];
+	private String belowparagraphe;
 	private int waittime;
 	public String[] getNotcontextand() {
 		return notcontextand;
@@ -135,7 +138,7 @@ public class Filter implements Comparable<Filter>{
 		setContext(e.attributeValue(StaticVar.context) == null || e.attributeValue(StaticVar.context).equals("") ? null : e.attributeValue(StaticVar.context));
 		setTimeranges(getTimeranges(e.attributeValue(StaticVar.timeranges)));
 		setContainand(e.attributeValue(StaticVar.containand) == null || e.attributeValue(StaticVar.containand).equals("") ? null : e.attributeValue(StaticVar.containand).split(StaticVar.SpiltString));
-		setContainor(e.attributeValue(StaticVar.containor) == null || e.attributeValue(StaticVar.containor).equals("") ? null : e.attributeValue(StaticVar.containor).split(StaticVar.containor));
+		setContainor(e.attributeValue(StaticVar.containor) == null || e.attributeValue(StaticVar.containor).equals("") ? null : e.attributeValue(StaticVar.containor).split(StaticVar.SpiltString));
 		setParagrapheand(e.attributeValue(StaticVar.paragrapheand) == null || e.attributeValue(StaticVar.paragrapheand).equals("") ? null : e.attributeValue(StaticVar.paragrapheand).split(StaticVar.SpiltString));
 		setParagrapheor(e.attributeValue(StaticVar.paragrapheor) == null || e.attributeValue(StaticVar.paragrapheor).equals("") ? null : e.attributeValue(StaticVar.paragrapheor).split(StaticVar.SpiltString));
 		setNotparagrapheand(e.attributeValue(StaticVar.notparagrapheand) == null || e.attributeValue(StaticVar.notparagrapheand).equals("") ? null : e.attributeValue(StaticVar.notparagrapheand).split(StaticVar.SpiltString));
@@ -153,6 +156,9 @@ public class Filter implements Comparable<Filter>{
 		setIsfight(e.attributeValue(StaticVar.isfight) == null || !e.attributeValue(StaticVar.isfight).equals("1") ? false : true);
 		setAboveparagraphe(e.attributeValue(StaticVar.aboveparagrapheor) == null || e.attributeValue(StaticVar.aboveparagrapheor).equals("") ? null : e.attributeValue(StaticVar.aboveparagrapheor).split(StaticVar.SpiltString));
 		setWaittime(e.attributeValue(StaticVar.waittime) == null || e.attributeValue(StaticVar.waittime).equals("") ? 0 : Integer.valueOf(e.attributeValue(StaticVar.waittime)));
+		setBelowparagrapheor(e.attributeValue(StaticVar.belowparagrapheor) == null ? null : e.attributeValue(StaticVar.belowparagrapheor).split(StaticVar.SpiltString));
+		setBelowparagrapheand(e.attributeValue(StaticVar.belowparagrapheand) == null ? null : e.attributeValue(StaticVar.belowparagrapheand).split(StaticVar.SpiltString));
+		setBelowparagraphe(e.attributeValue(StaticVar.belowparagraphe) == null ? null : e.attributeValue(StaticVar.belowparagraphe));
 		if (timeranges != null)
 			Collections.sort(timeranges);
 		childs = getChilds(e);
@@ -257,6 +263,24 @@ public class Filter implements Comparable<Filter>{
 	}
 	public void setWaittime(int waittime) {
 		this.waittime = waittime;
+	}
+	public String[] getBelowparagrapheor() {
+		return belowparagrapheor;
+	}
+	public void setBelowparagrapheor(String belowparagrapheor[]) {
+		this.belowparagrapheor = belowparagrapheor;
+	}
+	public String[] getBelowparagrapheand() {
+		return belowparagrapheand;
+	}
+	public void setBelowparagrapheand(String belowparagrapheand[]) {
+		this.belowparagrapheand = belowparagrapheand;
+	}
+	public String getBelowparagraphe() {
+		return belowparagraphe;
+	}
+	public void setBelowparagraphe(String belowparagraphe) {
+		this.belowparagraphe = belowparagraphe;
 	}
 
 }
