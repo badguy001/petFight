@@ -6,6 +6,9 @@
 		    <mainmenu name="领取" contextand="领取"></mainmenu>
 		</mainmenu>
 	
+		<mainmenu name="周周礼包" context="周周礼包">
+		    <mainmenu name="领取" context="领取"></mainmenu>
+		</mainmenu>
 		
 		<mainmenu name="夏日作战" order="" inparams="cmd=newAct&amp;subtype=47">
 			<mainmenu name="领取小铜锤" inparams="cmd=newAct&amp;subtype=47&amp;op=get" context="领取" resultreg="你[^！]+！">
@@ -118,7 +121,7 @@
 		<mainmenu name="历练" contextand="历练" order="1">
 		    <mainmenu name="历练" belowparagrapheor="商店">
 		        <mainmenu name="下一页" context="下一页">
-		            <mainmenu name="历练乐斗" context="乐斗" notcontainand="活力值：[0-9]{1}/50" notparagrapheor="[^0-9]{1}0{1}[^0-9]{1}" belowparagrapheor="上一页&amp;&amp;已击败" passthis="1"></mainmenu>
+		            <mainmenu name="历练乐斗" context="乐斗" notcontainand="活力值：[0-9]{1}/50" notparagrapheor="[^0-9]{1}0{1}[^0-9]+天书" belowparagrapheor="上一页&amp;&amp;已击败" passthis="1"></mainmenu>
 		        </mainmenu>
 		        <mainmenu name="历练乐斗" context="乐斗" notcontainand="活力值：[0-9]{1}/50" belowparagrapheor="第1/1页" passthis="1"></mainmenu>
 		    </mainmenu>
@@ -149,6 +152,7 @@
 				</mainmenu>
 			</mainmenu>
 			<mainmenu name="自动挑战" contextand="自动挑战" notcontainand="剩余次数：0/1"></mainmenu>
+			<mainmenu name="兑换" contextand="兑换"></mainmenu>
 		</mainmenu>
 		
 		<mainmenu name="副本" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=pve">
@@ -209,6 +213,7 @@
 			<mainmenu name="掠夺" contextand="掠夺">
 			
 			</mainmenu>
+			<mainmenu name="领取胜负奖励" context="领取胜负奖励"></mainmenu>
 		</mainmenu>
 		
 		
@@ -231,7 +236,7 @@
 		
 		<mainmenu name="领取徒弟经验" contextand="领取&amp;&amp;徒弟"></mainmenu>
 		
-		<mainmenu name="领奖" context="领奖">
+		<mainmenu name="领奖" context="领奖" order="1000">
 		    <mainmenu name="领取" context="领取"></mainmenu>
 		</mainmenu>
 		
@@ -351,6 +356,9 @@
 			<mainmenu name="任务" contextand="任务">
 			    <mainmenu name="领取" contextand="领取"></mainmenu>
 			</mainmenu>
+			<mainmenu name="领取" contextand="领取">
+			    <mainmenu name="领取" contextand="领取"></mainmenu>
+			</mainmenu>
 		</mainmenu>
 		
 		
@@ -364,7 +372,7 @@
 		</mainmenu>
 		
 		
-		<mainmenu name="佣兵" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=mercenary&amp;sub=1" notcontextor="助阵&amp;&amp;还童" disablebelow="1">
+		<mainmenu name="佣兵" params="zapp_uin,B_UID,sid,channel,g_ut" order="-1000" inparams="cmd=mercenary&amp;sub=1" notcontextor="助阵&amp;&amp;还童" disablebelow="1">
 			<mainmenu name="修炼馆" contextand="修炼馆" notcontainand="修炼位：2/2">
 				<mainmenu name="开始修炼" contextand="开始修炼">
 					<mainmenu name="修炼" contextand="修炼" paragrapheand="8小时&amp;&amp;不消耗"></mainmenu>
@@ -400,7 +408,10 @@
 		
 		
 		<mainmenu name="分享" contextand="分享" order="5000">
-		    <mainmenu name="一键分享" contextand="一键分享" notcontainand="6/6"></mainmenu>
+		    <mainmenu name="一键分享" contextand="一键分享" notcontainand="6/6&amp;&amp;5/5"></mainmenu>
+		    <mainmenu name="领取奖励" context="领取奖励">
+		        <mainmenu name="领取" context="领取"></mainmenu>
+		    </mainmenu>
 		</mainmenu>
 		
 		
