@@ -11,8 +11,8 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 public class Test {
-	private static final String cookieStoreFile = "Cookie"; 
-	private static final String hostsFile = "hosts";
+//	private static final String cookieStoreFile = "Cookie"; 
+//	private static final String hostsFile = "hosts";
 	private static final String usersFile = "users.xml";
 	private static final String userTagName = "user";
 	public static void main(String[] args) {

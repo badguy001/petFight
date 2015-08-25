@@ -188,7 +188,7 @@ public class User {
 		} catch (InterruptedException e3) {
 			e3.printStackTrace();
 		}
-		if (src == null)
+		if (src == null || src.trim().equals(""))
 			return;
 		src = src.replaceAll("<!DOCTYPE[^>]+>", "");
 		src = src.replaceAll("&nbsp", "");
@@ -197,6 +197,7 @@ public class User {
 			doc = DocumentHelper.parseText(src);
 		} catch (DocumentException e) {
 			e.printStackTrace();
+			return;
 		}
 		Element body =doc.getRootElement();
 		List<Element> urls = getURLs(body.elements(), "a");
@@ -246,7 +247,7 @@ public class User {
 	}
 	
 	private String getResult(String src, String resultreg[]){
-		String result = "";
+		String result = "\t";
 		Pattern pattern = null;
 		Matcher matcher = null;
 		for (String reg:resultreg){
