@@ -19,11 +19,6 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-import net.htmlparser.jericho.Attribute;
-import net.htmlparser.jericho.Attributes;
-import net.htmlparser.jericho.Element;
-import net.htmlparser.jericho.Source;
-
 public class Browse {
 	private static CookieStore cookieStore;
 	private static CloseableHttpClient httpclient;
@@ -64,9 +59,9 @@ public class Browse {
 				result += s + "\n";
 			}
 			// 不用重定向直接返回结果
-			if (response.getStatusLine().getStatusCode() != 301 && response.getStatusLine().getStatusCode() != 302) {
-				return result;
-			}
+//			if (response.getStatusLine().getStatusCode() != 301 && response.getStatusLine().getStatusCode() != 302) {
+//				return result;
+//			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -89,29 +84,30 @@ public class Browse {
 				e.printStackTrace();
 			}
 		}
-
-		// 需要重定向（httpclient能处理标准的重定向，这里只处理不规范的重定向
-
-		Source src = new Source(result);
-		Element element = src.getFirstElement("a");
-		if (element == null) {
-			// 无可用url，重定向失败
-			System.out.println("cannot find redrictURI!");
-			return result;
-		}
-		Attributes attributes = element.getAttributes();
-		String redrictURI = null;
-		for (Attribute attr : attributes)
-			if (attr.getName().equals("href"))
-				redrictURI = attr.getValue();
-		if (redrictURI == null) {
-			// redrict fail
-			System.out.println("cannot find redrictURI!");
-			return result;
-		} else{
-			System.out.println("redrict to " + redrictURI);
-			return getResult(redrictURI, "get", null);
-		}
+		return result;
+//
+//		// 需要重定向（httpclient能处理标准的重定向，这里只处理不规范的重定向
+//
+//		Source src = new Source(result);
+//		Element element = src.getFirstElement("a");
+//		if (element == null) {
+//			// 无可用url，重定向失败
+//			System.out.println("cannot find redrictURI!");
+//			return result;
+//		}
+//		Attributes attributes = element.getAttributes();
+//		String redrictURI = null;
+//		for (Attribute attr : attributes)
+//			if (attr.getName().equals("href"))
+//				redrictURI = attr.getValue();
+//		if (redrictURI == null) {
+//			// redrict fail
+//			System.out.println("cannot find redrictURI!");
+//			return result;
+//		} else{
+//			System.out.println("redrict to " + redrictURI);
+//			return getResult(redrictURI, "get", null);
+//		}
 			
 	}
 	
