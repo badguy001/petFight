@@ -133,6 +133,8 @@
 		</mainmenu>
 		
 		<mainmenu name="炼丹" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=alchemy&amp;subtype=1">
+			<mainmenu name="丹药出炉" context="丹药出炉"></mainmenu>
+			<mainmenu name="炼制" context="炼制" notparagrapheand="劣质" paragrapheor="[5-9]{1}[0-9]{1}[^分]&amp;&amp;[0-9]{3}" disablebelow="1"></mainmenu>
 			<mainmenu name="帮友丹炉" contextand="帮友丹炉">
 			    <mainmenu name="加柴&amp;&amp;强化" contextor="加柴&amp;&amp;强化" notcontainand="强化次数已达上限" resultreg="强化丹炉成功！&amp;&amp;(您|对方)[^！^。]+(！|。)"></mainmenu>
 			</mainmenu>
@@ -242,7 +244,7 @@
 		</mainmenu>
 		
 		<mainmenu name="巅峰之战" params="zapp_uin,B_UID,sid,channel,g_ut" order="1000" inparams="cmd=gvg&amp;sub=0">
-			<mainmenu name="征战" context="征战" passthis="1" waittime="10" notcontainor="挑战次数已经达到上限&amp;&amp;复活次数"></mainmenu>
+			<mainmenu name="征战" context="征战" passthis="1" waittime="10" notcontainor="挑战次数已经达到上限&amp;&amp;复活次数&amp;&amp;清除"></mainmenu>
 		</mainmenu>
 		<mainmenu name="巅峰之战" params="zapp_uin,B_UID,sid,channel,g_ut" order="" inparams="cmd=gvg&amp;sub=0">
 			<mainmenu name="领奖" inparams="cmd=gvg&amp;sub=1" context="领奖" resultreg="恭喜你[^。]+。&amp;&amp;很遗憾[^。]+。"></mainmenu>
@@ -328,7 +330,7 @@
 		<mainmenu name="今日活跃度" context="今日活跃度" order="-1000">
 		    <mainmenu name="供奉" context="供奉" paragrapheand="0/1">
 		        <mainmenu name="下页" context="下页" passthis="1">
-		            <mainmenu name="神来拳套" context="供奉" paragrapheor="神来拳套" resultreg="供奉成功。+贡献度"></mainmenu>
+		            <mainmenu name="神来拳套" context="供奉" paragrapheor="神来拳套&amp;&amp;还魂丹" resultreg="供奉成功。+贡献度"></mainmenu>
 		        </mainmenu>
 		    </mainmenu>
 		    <mainmenu name="抢地盘" context="抢地盘" paragrapheand="0/2">
@@ -379,7 +381,7 @@
 					<mainmenu name="修炼" contextand="修炼" paragrapheand="8小时&amp;&amp;不消耗"></mainmenu>
 				</mainmenu>
 			</mainmenu>
-			<mainmenu name="激活" contextand="免费激活" >
+			<mainmenu name="免费激活" contextand="免费激活" >
 			    <mainmenu name="签到" context="签到" resultreg="您的[^！]+！"></mainmenu>
 			    <mainmenu name="激活" context="激活"></mainmenu>
 			</mainmenu>
