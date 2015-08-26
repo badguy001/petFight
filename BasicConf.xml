@@ -286,9 +286,7 @@
 		<mainmenu name="好友" params="zapp_uin,B_UID,sid,channel,g_ut" contextand="好友" order="-11" isshow="" inparams="cmd=friendlist">
 			<mainmenu name="下页" contextand="下页" containor="当前体力值：([8-9]{1}[0-9]{1}|100)/100">
 				<mainmenu name="好友乐斗" context="乐斗" notcontextand="已乐斗"  resultreg="你主动与.*贡献度。" disablebelow="1"></mainmenu>
-				<mainmenu name="好友乐斗" context="乐斗" notcontextand="已乐斗"  resultreg="你主动与.*贡献度。" disablebelow="1"></mainmenu>
 				<mainmenu name="下页" contextand="下页" containor="当前体力值：([8-9]{1}[0-9]{1}|100)/100">
-					<mainmenu name="好友乐斗" context="乐斗" notcontextand="已乐斗"  resultreg="你主动与.*贡献度。" disablebelow="1"></mainmenu>
 					<mainmenu name="好友乐斗" context="乐斗" notcontextand="已乐斗"  resultreg="你主动与.*贡献度。" disablebelow="1"></mainmenu>
 				</mainmenu>
 			</mainmenu>
