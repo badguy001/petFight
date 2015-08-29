@@ -1,7 +1,56 @@
 <root>
 
 	<basicfilters>
-	
+		
+	    <mainmenu name="背包" context="背包">
+	        <mainmenu name="使用" context="使用" paragrapheor="宝箱&amp;&amp;补给&amp;&amp;贡献小笼包&amp;&amp;经验木简&amp;&amp;阅历羊皮卷&amp;&amp;阅历宗卷&amp;&amp;锦囊&amp;&amp;信物"></mainmenu>
+	        <mainmenu name="下页" contextand="下页" passthis="1"></mainmenu>
+	    </mainmenu>
+	    
+	    <mainmenu name="摇摇乐" context="摇摇乐">
+	        <mainmenu name="转动" context="转动" notcontainand="转动次数：0" passthis="1"></mainmenu>
+	    </mainmenu>
+	    
+	    <mainmenu name="开学大礼包" context="开学大礼包">
+	        <mainmenu name="领取" contextor="领取&amp;&amp;领奖"></mainmenu>
+	    </mainmenu>
+	    
+	    <mainmenu name="开宝箱" context="开宝箱" order="">
+	        <mainmenu name="古铜宝箱" contextand="打开" paragrapheand="古铜宝箱" notcontainand="古铜钥匙：0" passthis="1"></mainmenu>
+	    </mainmenu>
+	    <mainmenu name="开宝箱" context="开宝箱">
+	        <mainmenu name="翡翠宝箱" contextand="打开" paragrapheand="翡翠宝箱" notcontainand="翡翠钥匙：0" passthis="1"></mainmenu>
+	    </mainmenu>
+	    
+	    <mainmenu name="探宝" context="探宝">
+	        <mainmenu name="恢复生命" context="恢复生命"></mainmenu>
+	    </mainmenu>
+	    <mainmenu name="探宝" context="探宝">
+	        <mainmenu name="地砖" context="地砖" notcontainor="生命值：0" passthis="1"></mainmenu>
+	    </mainmenu>
+	    
+	    <mainmenu name="极地冒险" context="极地冒险">
+	        <mainmenu name="领铁铲" contextand="领铁铲"></mainmenu>
+	    </mainmenu>
+	    <mainmenu name="极地冒险" context="极地冒险">
+	        <mainmenu name="冰" contextand="冰" notcontainor="铁铲 [ ]*0&amp;&amp;没有足够的铁铲&amp;&amp;找到宝藏了" disablebelow="1" passthis="1"></mainmenu>
+	    </mainmenu>
+	    
+	    <mainmenu name="晃动的天平" context="晃动的天平">
+	        <mainmenu name="开始游戏" context="开始游戏"></mainmenu>
+	    </mainmenu>
+	    <mainmenu name="晃动的天平" context="晃动的天平">
+	        <mainmenu name="增加道具" context="增加道具" passthis="1" notcontainor="已经进行过游戏">
+	            <mainmenu name="领取物品" context="领取物品" containor="右侧重量=0.[0-9]{1}Kg&amp;&amp;右侧重量=1.[0-5]{1}Kg"></mainmenu>
+	        </mainmenu>
+	    </mainmenu>
+	    
+	    <mainmenu name="徽章馆" context="徽章馆">
+	        <mainmenu name="可激活" paragrapheand="可激活">
+	            <mainmenu name="激活" context="激活"></mainmenu>
+	        </mainmenu>
+	    </mainmenu>
+	    
 		<mainmenu name="登录100QB好礼" contextand="登录100QB好礼">
 		    <mainmenu name="领取" contextand="领取"></mainmenu>
 		</mainmenu>
@@ -199,7 +248,7 @@
 			<mainmenu name="高倍转盘" contextand="高倍转盘"></mainmenu>
 		</mainmenu>
 		<mainmenu name="踢馆" contextand="踢馆" notcontextand="踢馆战">
-			<mainmenu name="挑战" contextand="挑战" notcontextand="记录" notcontainor="生命：0&amp;&amp;不在挑战时间范围&amp;&amp;入帮48小时" passthis="1"></mainmenu>
+			<mainmenu name="挑战" contextand="挑战" notcontextand="记录" notcontainor="生命：0&amp;&amp;不在挑战时间范围&amp;&amp;入帮48小时&amp;&amp;已用光" passthis="1"></mainmenu>
 		</mainmenu>
 		<mainmenu name="踢馆" contextand="踢馆" notcontextand="踢馆战">
 			<mainmenu name="领奖" contextand="领奖"></mainmenu>
@@ -327,9 +376,8 @@
 		
 		<mainmenu name="今日活跃度" context="今日活跃度" order="-1000">
 		    <mainmenu name="供奉" context="供奉" paragrapheand="0/1">
-		        <mainmenu name="下页" context="下页" passthis="1">
-		            <mainmenu name="神来拳套" context="供奉" paragrapheor="神来拳套&amp;&amp;还魂丹" resultreg="供奉成功。+贡献度"></mainmenu>
-		        </mainmenu>
+		        <mainmenu name="神来拳套" context="供奉" paragrapheor="神来拳套&amp;&amp;还魂丹" resultreg="供奉成功。+贡献度"></mainmenu>
+		        <mainmenu name="下页" context="下页" passthis="1"></mainmenu>
 		    </mainmenu>
 		    <mainmenu name="抢地盘" context="抢地盘" paragrapheand="0/2">
 		    	<mainmenu name="选择地盘" contextor="120级以下">
@@ -373,7 +421,7 @@
 		</mainmenu>
 		
 		
-		<mainmenu name="佣兵" params="zapp_uin,B_UID,sid,channel,g_ut" order="10000" inparams="cmd=mercenary&amp;sub=1" notcontextor="助阵&amp;&amp;还童" disablebelow="1">
+		<mainmenu name="佣兵" params="zapp_uin,B_UID,sid,channel,g_ut" order="-10000" inparams="cmd=mercenary&amp;sub=1" notcontextor="助阵&amp;&amp;还童" disablebelow="1">
 			<mainmenu name="修炼馆" contextand="修炼馆" notcontainand="修炼位：(2/2|1/1)">
 				<mainmenu name="开始修炼" contextand="开始修炼">
 					<mainmenu name="修炼" contextand="修炼" paragrapheand="8小时&amp;&amp;不消耗"></mainmenu>
@@ -381,7 +429,7 @@
 			</mainmenu>
 			<mainmenu name="免费激活" contextand="免费激活" >
 			    <mainmenu name="签到" context="签到" resultreg="您的[^！]+！"></mainmenu>
-			    <mainmenu name="激活" context="激活"></mainmenu>
+			    <mainmenu name="激活" contextor="激活"></mainmenu>
 			</mainmenu>
 		</mainmenu>
 		

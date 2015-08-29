@@ -308,6 +308,7 @@ public class User {
 	}
 
 	public void Do() {
+		mainpage = Browse.getResult(host, "get", null);
 		this.Do(mainpage, BasicFitler.rootFilter);
 	}
 	
