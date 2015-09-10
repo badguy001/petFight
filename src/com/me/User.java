@@ -192,6 +192,7 @@ public class User {
 			return;
 		src = src.replaceAll("<!DOCTYPE[^>]+>", "");
 		src = src.replaceAll("&nbsp", "");
+		src = src.replaceAll("(<br>|</br>)", "");
 		Document doc = null;
 		try {
 			doc = DocumentHelper.parseText(src);

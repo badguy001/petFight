@@ -19,18 +19,36 @@ public class Test {
 		Browse.init();
 		List<User> users = new Test().getUsers();
 		Calendar d = Calendar.getInstance();
+		d.setTimeInMillis(System.currentTimeMillis());
 		while(true){
 			Calendar d1 = Calendar.getInstance();
-			if (d1.get(Calendar.DAY_OF_YEAR) - d.get(Calendar.DAY_OF_YEAR) > 0 || d1.get(Calendar.YEAR) > d.get(Calendar.YEAR)){
-				users = new Test().getUsers();
-				d = d1;
+			d1.setTimeInMillis(System.currentTimeMillis());
+			System.out.println(d1.getTime().toString());
+			if ( d1.get(Calendar.HOUR_OF_DAY ) >= 7 || (d1.get(Calendar.HOUR_OF_DAY ) == 6 && d1.get(Calendar.MINUTE) >= 35) ){
+				if (d1.get(Calendar.DAY_OF_YEAR) - d.get(Calendar.DAY_OF_YEAR) > 0
+						|| d1.get(Calendar.YEAR) > d.get(Calendar.YEAR)) {
+					// if (d1.get(Calendar.MINUTE) - d.get(Calendar.MINUTE) > 0
+					// || d1.get(Calendar.HOUR_OF_DAY) >
+					// d.get(Calendar.HOUR_OF_DAY)){
+					users = new Test().getUsers();
+
+					d = d1;
+				}
+				new Test().begin(users);
+				try {
+					Thread.sleep(2*60*60*1000);
+//					Thread.sleep(20*60*1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					Thread.sleep(15*60*1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
-			new Test().begin(users);
-			try {
-				Thread.sleep(2*60*60*1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+
 		}
 
 	}
